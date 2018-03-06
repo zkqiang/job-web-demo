@@ -97,15 +97,15 @@ class Job(Base):
     # 职位待遇
     treatment = db.Column(db.Text)
     # 经验要求
-    exp = db.Column(db.String(64), nullable=False)
+    exp = db.Column(db.String(16), nullable=False)
     # 学历要求
-    education = db.Column(db.String(64), nullable=False)
+    education = db.Column(db.String(16), nullable=False)
     # 技术栈要求
     stacks = db.Column(db.String(128))
     # 工作地点
     location = db.Column(db.String(32))
     # 职位标签
-    tags = db.Column(db.String(128))
+    tags = db.Column(db.String(64))
     # 职位上线
     is_enable = db.Column(db.Boolean, default=True)
 
