@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/main.css">
+  </head>
+<html lang="zh-CN">
+  <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+         <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="/">Carnivore</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+          <li class="active"><a href="/">首页<span class="sr-only">(current)</span></a></li>
+          <li><a href="/">职位</a></li>
+          <li><a href="/">公司</a></li>
+          <li><a href="/">公司注册</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{url_for('front.register')}}">求职者注册</a></li>
+          <li><a href="{{url_for('front.login')}}">登录</a></li>
+      </ul>
+      </div>
+     </div>
+ </nav>
+
+ <div class="jumbotron masthead">
+    <div class="container">
+      <h1>JobPlus4-16</h1>
+      <h2>简洁、直观、强悍的找工作网站，让找工作更迅速、简单。</h2>
+    </div>
+  </div>
+              
+
+    <div class="container">
+      {% block body %}{% endblock %}
+      {% block footer %}{% endblock %}
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>
