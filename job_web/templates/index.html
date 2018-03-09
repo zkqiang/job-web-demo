@@ -7,7 +7,7 @@
 <div class="jumbotron">
   <div class="container">
     <h1>Job Web Demo</h1>
-    <p>Python/Flask/Bootstrap</p>
+    <p>Python/Flask/Jinja2/Bootstrap</p>
   </div>
 </div>
 {% endblock %}
@@ -20,7 +20,7 @@
 </ul>
 
 <div class="job-list">
-  {% for job in newest_jobs %}
+  {% for job in jobs %}
     {{ render_job(job) }}
   {% endfor %}
 </div>
@@ -38,7 +38,7 @@
 </ul>
 
 <div class="company-list">
-  {% for company in newest_companies %}
+  {% for company in companies %}
     {{ render_company(company) }}
   {% endfor %}
 </div>

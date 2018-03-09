@@ -1,0 +1,15 @@
+
+{% extends "base.html" %}
+{% from "macros.html" import render_job, render_pagination %}
+
+{% block title %}职位列表{% endblock %}
+
+{% block body %}
+
+<div class="job_list">
+    {% for job in pagination.items %}
+        {{ render_job(job) }}
+    {% endfor %}
+</div>
+{{ render_pagination(pagination, 'job.index') }}
+{% endblock %}

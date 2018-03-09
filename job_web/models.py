@@ -10,7 +10,6 @@ db = SQLAlchemy()
 class Base(db.Model):
     __abstract__ = True
 
-    id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime,
                            default=datetime.utcnow,
@@ -18,11 +17,11 @@ class Base(db.Model):
 
 
 class UserBase(Base, UserMixin):
-    __tablename__ = 'user_base'
+    __abstract__ = True
 
-    username = db.Column(db.String(32), unique=True, index=True, nullable=False)
+    name = db.Column(db.String(64), unique=True, index=True, nullable=False)
     email = db.Column(db.String(64), unique=True, index=True, nullable=False)
-    phone = db.Column(db.Integer, unique=True, index=True, nullable=False)
+    # phone = db.Column(db.Integer, unique=True, index=True, nullable=False)
     _password = db.Column('password', db.String(128), nullable=False)
     role = db.Column(db.SmallInteger, default=0)
     is_enable = db.Column(db.Boolean, default=True)
@@ -42,6 +41,7 @@ class UserBase(Base, UserMixin):
 class User(UserBase):
     __tablename__ = 'user'
 
+    id = db.Column(db.Integer, primary_key=True)
     resume = db.Column(db.String(128))
 
     def __repr__(self):
@@ -51,6 +51,7 @@ class User(UserBase):
 class Company(UserBase):
     __tablename__ = 'company'
 
+    id = db.Column(db.Integer, primary_key=True)
     website = db.Column(db.String(64))
     address = db.Column(db.String(256))
     logo = db.Column(db.String(256))
@@ -63,6 +64,9 @@ class Company(UserBase):
     # 详情
     detail = db.Column(db.Text)
 
+    def enabled_jobs(self):
+        return self.jobs.filter(Job.is_enable.is_(True))
+
     def __repr__(self):
         return '<Company: {}'.format(self.username)
 
@@ -70,11 +74,12 @@ class Company(UserBase):
 class Job(Base):
     __tablename__ = 'job'
 
-    job_name = db.Column(db.String(32), index=True)
-    salary_min = db.Column(db.Integer, nullable=False)
-    salary_max = db.Column(db.Integer, nullable=False)
-    # company_id = db.Column(db.Integer, db.ForeignKey('company.id', ondelete='CASCADE'))
-    # company = db.relationship('Company', uselist=False, backref=db.backref('jobs', lazy='dynamic'))
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(32), index=True)
+    salary_min = db.Column(db.SmallInteger, nullable=False)
+    salary_max = db.Column(db.SmallInteger, nullable=False)
+    company_id = db.Column(db.Integer, db.ForeignKey('company.id', ondelete='CASCADE'))
+    company = db.relationship('Company', uselist=False, backref=db.backref('jobs', lazy='dynamic'))
     # 职位描述
     description = db.Column(db.Text)
     # 职位待遇
@@ -107,32 +112,33 @@ class Job(Base):
     def tag_list(self):
         return self.tags.split(",")
 
-    # @property
-    # def current_user_is_applied(self):
-    #     delivery = Delivery.query.filter_by(job_id=self.id, user_id=current_user.id).first()
-    #     return delivery is not None
+    @property
+    def current_user_is_applied(self):
+        delivery = Delivery.query.filter_by(job_id=self.id, user_id=current_user.id).first()
+        return delivery is not None
 
 
-# class Delivery(Base):
-#     __tablename__ = 'delivery'
-#
-#     STATUS_WAITTING = 1
-#     STATUS_REJECT = 2
-#     STATUS_ACCEPT = 3
-#
-#     job_id = db.Column(db.Integer, db.ForeignKey('job.id', ondelete='SET NULL'))
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='SET NULL'))
-#     company_id = db.Column(db.Integer)
-#     status = db.Column(db.SmallInteger, default=STATUS_WAITTING)
-#     company_response = db.Column(db.String(256))
-#
-#     @property
-#     def user(self):
-#         return User.query.get(self.user_id)
-#
-#     @property
-#     def job(self):
-#         return Job.query.get(self.job_id)
-#
-#     def __repr__(self):
-#         return '<Delivery: {}'.format(self.title)
+class Delivery(Base):
+    __tablename__ = 'delivery'
+
+    STATUS_WAITTING = 1
+    STATUS_REJECT = 2
+    STATUS_ACCEPT = 3
+
+    id = db.Column(db.Integer, primary_key=True)
+    job_id = db.Column(db.Integer, db.ForeignKey('job.id', ondelete='SET NULL'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='SET NULL'))
+    company_id = db.Column(db.Integer)
+    status = db.Column(db.SmallInteger, default=STATUS_WAITTING)
+    company_response = db.Column(db.String(256))
+
+    @property
+    def user(self):
+        return User.query.get(self.user_id)
+
+    @property
+    def job(self):
+        return Job.query.get(self.job_id)
+
+    def __repr__(self):
+        return '<Delivery: {}'.format(self.title)

@@ -32,7 +32,9 @@
 {% macro render_pagination(pagination, endpoint) %}
 <nav class="nav-pagination" aria-label="Page navigation">
   <ul class=pagination>
-  <li>{% if not pagination.has_prev %} class="disabled"{% endif %}><a href="{{url_for(endpoint, page=pagination.prev_num) if pagination.has_prev else '#'}}">&laquo;</a></li>
+  {% if pagination.has_prev %}
+      <li><a href="{{url_for(endpoint, page=pagination.prev_num) if pagination.has_prev else '#'}}">&laquo;</a></li>
+  {% endif %}
   {% for page in pagination.iter_pages() %}
     {% if page %}
       {% if page != pagination.page %}
@@ -42,7 +44,9 @@
       {% endif %}
     {% endif %}
   {% endfor %}
-  <li>{% if not pagination.has_next %} class="disabled"{% endif %}><a href="{{url_for(endpoint, page=pagination.next_num) if pagination.has_next else '#'}}">&raquo;</a></li>
+  {% if pagination.has_prev %}
+      <li><a href="{{url_for(endpoint, page=pagination.next_num) if pagination.has_next else '#'}}">&raquo;</a></li>
+  {% endif %}
   </ul>
 </nav>
 {% endmacro %}
@@ -52,15 +56,15 @@
 <div class="col-sm-6 col-md-3 company-item">
   <div class="thumbnail">
       <a href="{{ url_for('company.detail', company_id=company.id) }}">
-        <img src="{{ company.detail.logo }}" width="100" height="100" alt="{{ company.detail.name }}">
+        <img src="{{ company.logo }}" width="100" height="100" alt="{{ company.name }}">
       </a>
-      <h4>{{ company.detail.name }}</h4>
-      <p>{{ company.detail.field }} / {{ company.detail.finance_stage }}<br/>
-         {{ company.detail.description | truncate(12, True) }}</p>
+      <h4>{{ company.name }}</h4>
+      <p>{{ company.field }} / {{ company.finance_stage }}<br/>
+         {{ company.description | truncate(12, True) }}</p>
   <hr>
-  <a href="{{ url_for('company.company_jobs', company_id=company.id) }}">
+  <a href="{{ url_for('company.jobs', company_id=company.id) }}">
       <p>
-         {{ company.is_enable_jobs.count() }}<br/>在招职位
+         {{ company.enabled_jobs().count() }}<br/>在招职位
       </p>
   </a>
   </div>
@@ -75,8 +79,8 @@
         <a href="{{ url_for('job.detail', job_id=job.id) }}">
         <b>{{ job.name }}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </a>
-        <b>{{ job.salary_low }}k-{{ job.salary_high }}k</b><br/>
-        <span>经验{{ job.exp }} / {{ job.degree }}</span><br/>
+        <b>{{ job.salary_min }}k-{{ job.salary_max }}k</b><br/>
+        <span>{{ job.exp }}经验 / {{ job.education }}</span><br/>
         {% for tag in job.tag_list %}
         <span class="label label-default">{{ tag }}</span>
         {% endfor %}
@@ -85,14 +89,14 @@
       <div class="media">
         <div class="media-left">
           <a href="{{ url_for('company.detail', company_id=job.company.id) }}">
-            <img class="media-object" src="{{ job.company.detail.logo }}" width="40" height="40" alt="job.company.detail.name">
+            <img class="media-object" src="{{ job.company.logo }}" width="40" height="40" alt="job.company.name">
           </a>
         </div>
         <div class="media-body">
           <a href="{{ url_for('company.detail', company_id=job.company.id) }}">
-          <h4 class="media-heading">{{ job.company.detail.name }}</h4>
+          <h4 class="media-heading">{{ job.company.name }}</h4>
           </a>
-          <span class="company-meta">{{ job.company.detail.field }}/{{ job.company.detail.finance_stage }}/{{ job.location }}</span>
+          <span class="company-meta">{{ job.company.field }} / {{ job.company.finance_stage }} / {{ job.city }}</span>
           </div>
         </div>
     </div>

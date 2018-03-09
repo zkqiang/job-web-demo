@@ -12,11 +12,11 @@ front = Blueprint('front', __name__)
 @front.route('/')
 def index():
     jobs = Job.query.filter(Job.is_enable.is_(True)).order_by(Job.updated_at.desc()).limit(9)
-    companies = Company.query.filter(Job.is_enable.is_(True)).order_by(Company.updated_at).limit(8)
+    companies = Company.query.filter(Company.is_enable.is_(True)).order_by(Company.updated_at).limit(8)
     return render_template('index.html', active='index', jobs=jobs, companies=companies)
 
 
-@front.route('/login')
+@front.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -36,7 +36,7 @@ def login():
     return render_template('login.html', form=form, active='login')
 
 
-@front.route('/logout')
+@front.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
     logout_user()

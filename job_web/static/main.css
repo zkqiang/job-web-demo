@@ -1,0 +1,139 @@
+span {
+    float: left;
+    margin: 0 3px;
+    color: #999;
+}
+
+.item_con_ul {
+    color: #777;
+    font-size: 12px;
+}
+
+.con_ul_li {
+    display: block;
+    float: left;
+    height: 25px;
+    padding: 0 10px;
+    margin: 0 10px 10px 0;
+    border: 1px solid #ededed;
+    border-radius: 15px;
+    background-color: #fff;
+    line-height: 25px;
+    text-align: center;
+}
+
+ul.item_con_list {
+    width: 700px;
+    margin: 0 auto
+}
+
+.nav-pagination {
+    text-align: center;
+}
+
+.container {
+    width: 1024px;
+    margin: 0 auto;
+    padding-bottom: 0
+}
+
+.name {
+    position: relative;
+    display: inline-block;
+    height: 36px;
+    font-size: 36px;
+    color: #333;
+    line-height: 36px;
+}
+
+.salary {
+    color: #fd5f39;
+}
+
+.position-deal.clearfix {
+    margin-right: 60px;
+}
+
+.s_position_list .list_item_top {
+    width: 928px;
+    height: 80px;
+    padding: 14px 15px 0;
+}
+
+.form {
+    width: 400px;
+    margin: 0 auto;
+}
+
+a,
+a:hover,
+a:visited {
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
+.nav-pagination {
+    text-align: center;
+    clear: both;
+}
+
+.job-list,
+.company-list {
+    margin-top: 15px;
+}
+
+.job-box {
+    padding: 13px;
+    border: solid 1px #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.job-item {
+    border: 1px solid #eee;
+    border-left: 5px solid #00b38a;
+    padding: 15px 10px;
+    margin-bottom: 15px;
+}
+
+.list-title {
+    margin: 0 15px;
+}
+
+.company-item {
+    text-align: center;
+}
+
+.company-detail {
+    margin: 30px 0;
+    font-size: 15px;
+}
+
+.header {
+    padding: 0;
+}
+
+.list-more {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.list-more-btn {
+    padding: 10px 138px;
+	color: #5cb85c;
+    background-color: #fff;
+}
+
+.footer {
+    clear: both;
+    border-top: 1px solid #eee;
+    padding: 16px 0 24px;
+    text-align: center;
+    margin-bottom: 115px;
+    color: #999;
+    font-size: 14px;
+ }
+
+.company-meta {
+    color: #999;
+}

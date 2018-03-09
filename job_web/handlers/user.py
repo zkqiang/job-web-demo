@@ -15,7 +15,7 @@ def register():
         form.create_user()
         flash('注册成功，请登录', 'success')
         return redirect(url_for('.login'))
-    return render_template('user/register.html', active='company_register')
+    return render_template('user/register.html', form=form, active='company_register')
 
 
 @user.route('/<int:user_id>detail')
