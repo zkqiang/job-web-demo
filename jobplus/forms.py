@@ -1,10 +1,21 @@
+from flask import current_app
 from flask_ckeditor import CKEditorField
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import IntegerField, PasswordField, SelectField, \
-    StringField, SubmitField, TextAreaField, ValidationError
+    StringField, SubmitField, TextAreaField, ValidationError, BooleanField
 from wtforms.validators import Email, EqualTo, Regexp, Length, URL, DataRequired
 from .models import User, Company, db, Job
+from .app import uploaded_pdf
+
+FINANCE_STAGE = ['未融资', '天使轮', 'A轮', 'B轮', 'C轮', 'D轮及以上', '上市公司', '不需要融资']
+FIELD = ['移动互联网', '电子商务', '金融', '企业服务', '教育', '文化娱乐', '游戏', 'O2O', '硬件']
+EXP = ['应届毕业生', '3年及以下', '3-5年', '5-10年', '10年以上', '不限']
+EDUCATION = ['不限', '专科', '本科', '硕士', '博士']
+
+ROLE_USER = 10
+ROLE_COMPANY = 20
+ROLE_ADMIN = 30
 
 
 class RegisterBaseForm(FlaskForm):
@@ -35,6 +46,7 @@ class RegisterUserForm(RegisterBaseForm):
         user.username = self.username.data
         user.email = self.email.data
         user.password = self.password.data
+        user.role = ROLE_USER
         db.session.add(user)
         db.session.commit()
         return user
@@ -42,12 +54,12 @@ class RegisterUserForm(RegisterBaseForm):
 
 class RegisterCompanyForm(RegisterBaseForm):
 
-    def create_company(self, role):
+    def create_company(self):
         company = Company()
         company.username = self.username.data
         company.email = self.email.data
         company.password = self.password.data
-        company.role = role
+        company.role = ROLE_COMPANY
         db.session.add(company)
         db.session.commit()
         return company
@@ -58,6 +70,8 @@ class LoginForm(FlaskForm):
                                           Email(message='请输入合法的email地址')])
     password = PasswordField('密码', validators=[DataRequired(message='请填写密码'),
                                                Length(6, 24, message='长度须在6～24个字符之间')])
+    remember_me = BooleanField('记住登录状态')
+    submit = SubmitField('登录')
 
     def validate_email(self, field):
         if not User.query.filter_by(email=field.data).first():
@@ -76,10 +90,10 @@ class UserDetailForm(FlaskForm):
                 FileRequired('文件未选择')])
     submit = SubmitField('提交')
 
-    def update_profile(self, user):
+    def update_detail(self, user):
         self.populate_obj(user)
-        # filename = uploaded_pdfs.save(self.resume.data)
-        # user.resume_url = uploaded_pdfs.url(filename)
+        filename = uploaded_pdf.save(self.resume.data)
+        user.resume_url = uploaded_pdf.url(filename)
         db.session.add(user)
         db.session.commit()
 
@@ -95,43 +109,13 @@ class CompanyDetailForm(FlaskForm):
     tags = StringField('职位标签(用逗号区隔)')
     description = StringField('公司简介', validators=[DataRequired(message='请填写内容')])
     company_info = CKEditorField('公司详情', validators=[DataRequired(message='请填写内容')])
-    finance_stage = SelectField('融资阶段',
-                                choices=[
-                                    ('未融资', '未融资'),
-                                    ('天使轮', '天使轮'),
-                                    ('A轮', 'A轮'),
-                                    ('B轮', 'B轮'),
-                                    ('C轮', 'C轮'),
-                                    ('D轮及以上', 'D轮及以上'),
-                                    ('上市公司', '上市公司'),
-                                    ('不需要融资', '不需要融资'),
-                                    ]
-                                )
-    field = SelectField('行业领域',
-                        choices=[
-                            ('移动互联网', '移动互联网'),
-                            ('电子商务', '电子商务'),
-                            ('金融', '金融'),
-                            ('企业服务', '企业服务'),
-                            ('教育', '教育'),
-                            ('文化娱乐', '文化娱乐'),
-                            ('游戏', '游戏'),
-                            ('O2O', 'O2O'),
-                            ('硬件', '硬件'),
-                            ]
-                        )
+    finance_stage = SelectField('融资阶段', choices=[(i, i) for i in FINANCE_STAGE])
+    field = SelectField('行业领域', choices=[(i, i) for i in FIELD])
     submit = SubmitField('提交')
 
-    def update_profile(self, user):
-        if user.company_detail:
-            company_detail = user.company_detail
-        else:
-            company_detail = Company()
-            company_detail.user_id = user.id
-
-        self.populate_obj(company_detail)
-        db.session.add(user)
-        db.session.add(company_detail)
+    def update_detail(self, company):
+        self.populate_obj(company)
+        db.session.add(company)
         db.session.commit()
 
 
@@ -142,25 +126,8 @@ class JobForm(FlaskForm):
     location = StringField('工作地点', validators=[DataRequired(message='请填写内容'), Length(4, 32)])
     tags = StringField('职位标签(用逗号区隔)', validators=[Length(0, 64)])
     stacks = StringField('技术栈标签(用逗号区隔)')
-    exp = SelectField('工作年限',
-                      choices=[
-                            ('应届毕业生', '应届毕业生'),
-                            ('3年及以下', '3年及以下'),
-                            ('3-5年', '3-5年'),
-                            ('5-10年', '5-10年'),
-                            ('10年以上', '10年以上'),
-                            ('不限', '不限'),
-                            ]
-                      )
-    education = SelectField('学历要求',
-                            choices=[
-                                ('不限', '不限'),
-                                ('专科', '专科'),
-                                ('本科', '本科'),
-                                ('硕士', '硕士'),
-                                ('博士', '博士'),
-                                ]
-                            )
+    exp = SelectField('工作年限', choices=[(i, i) for i in EXP])
+    education = SelectField('学历要求', choices=[(i, i) for i in EDUCATION])
     treatment = TextAreaField('职位待遇', validators=[Length(0, 256)])
     description = CKEditorField('职位描述', validators=[DataRequired(message='请填写内容')])
     submit = SubmitField('发布')

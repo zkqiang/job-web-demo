@@ -1,31 +1,64 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, render_template, current_app, redirect, url_for, flash
+from flask import Blueprint, render_template, \
+    current_app, redirect, url_for, flash, request
+from flask_login import login_user
+from ..models import User, Job, Company
+from ..decorators import admin_required
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
 
 
 @admin.route('/')
-def admin_index():
+@admin_required
+def index():
     return render_template('admin/index.html')
 
 
 @admin.route('/user')
-def admin_user():
-    return render_template('admin/user.html')
+@admin_required
+def user():
+    page = request.args.get('page', default=1, type=int)
+    content = User.query.paginate(
+        page=page,
+        per_page=current_app.config['LIST_PER_PAGE'],
+        error_out=False
+    )
+    return render_template('admin/user.html', content=content)
 
 
 @admin.route('/company')
-def admin_company():
-    return render_template('admin/company.html')
+@admin_required
+def company():
+    page = request.args.get('page', default=1, type=int)
+    content = Company.query.paginate(
+        page=page,
+        per_page=current_app.config['LIST_PER_PAGE'],
+        error_out=False
+    )
+    return render_template('admin/company.html', content=content)
 
 
 @admin.route('/job')
-def admin_job():
-    return render_template('admin/job.html')
+@admin_required
+def job():
+    page = request.args.get('page', default=1, type=int)
+    content = Job.query.paginate(
+        page=page,
+        per_page=current_app.config['LIST_PER_PAGE'],
+        error_out=False
+    )
+    return render_template('admin/job.html', content=content)
 
 
-@admin.route('/resume')
-def admin_resume():
-    return render_template('admin/resume.html')
+# @admin.route('/resume')
+# @admin_required
+# def resume():
+#     page = request.args.get('page', default=1, type=int)
+#     content = User.query.paginate(
+#         page=page,
+#         per_page=current_app.config['LIST_PER_PAGE'],
+#         error_out=False
+#     )
+#     return render_template('admin/resumes.html', content=content)

@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% from "macros.html" import render_form %}
 
-</body>
-</html>
+{% block title %}登录{% endblock %}
+
+{% block body %}
+<div class="form">
+    <h2>登录</h2>
+    {{ render_form(form, url_for("front.login")) }}
+</div>
+{% endblock %}

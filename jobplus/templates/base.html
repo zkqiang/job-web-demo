@@ -1,51 +1,121 @@
+{% from "macros.html" import render_form %}
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/main.css">
-  </head>
-<html lang="zh-CN">
-  <body>
-    <nav class="navbar navbar-inverse">
-      <div class="container">
-         <div class="navbar-header">
-         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-           <span class="sr-only">Toggle navigation</span>
-           <span class="icon-bar"></span>
-           <span class="icon-bar"></span>
-         </button>
-         <a class="navbar-brand" href="/">Carnivore</a>
-      </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-          <li class="active"><a href="/">首页<span class="sr-only">(current)</span></a></li>
-          <li><a href="/">职位</a></li>
-          <li><a href="/">公司</a></li>
-          <li><a href="/">公司注册</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="{{url_for('front.register')}}">求职者注册</a></li>
-          <li><a href="{{url_for('front.login')}}">登录</a></li>
-      </ul>
-      </div>
-     </div>
- </nav>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{% endblock %}</title>
+        {% block head_css %}
+        {{ ckeditor.load() }}
+        {{ ckeditor.load_code_theme() }}
+        {{ moment.include_jquery() }}
+        {{ moment.include_moment() }}
+        {{ moment.lang('zh-CN')}}
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://www.lgstatic.com/www/static/pkg/search-result/page/index/main.html_aio_2_3c98000.css">
+        <link rel="stylesheet" href="https://www.lgstatic.com/www/static/pkg/widgets_4e04063.css">
+        <link rel="stylesheet" href="https://www.lgstatic.com/www/static/pkg/job-detail/page/index/main.html_aio_2_1410e60.css">
+        <link rel="stylesheet" href="/static/main.css">
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">切换导航</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">SimpleJob</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="{% if active == 'index' %}active{% endif %}">
+                            <a href="/">首页<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="{% if active == 'job' %}active{% endif %}">
+                            <a href="{{ url_for('job.index') }}">职位</a>
+                        </li>
+                        <li class="{% if active == 'company' %}active{% endif %}">
+                            <a href="{{ url_for('company.index') }}">公司</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if not current_user.is_authenticated %}
+                            <li class="{% if active == 'company_register' %}active{% endif %}">
+                            	<a href="{{ url_for('company.register') }}">企业注册</a>
+                            </li>
+                            <li class="{% if active == 'user_register' %}active{% endif %}">
+                            	<a href="{{ url_for('user.register') }}">个人注册</a>
+                            </li>
+                            <li class="{% if active == 'login' %}active{% endif %}">
+                                <a href="{{ url_for('.login') }}">登录</a>
+                            </li>
+                        {% else %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button", aria-haspopup="true" aria-expanded="false">
+                                    <span id="username">{{ current_user.username }}</span>
+                                    <span class="caret"></span>
+                                </a>
+                                {% if current_user.role == 10 %}
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ url_for('user.detail') }}">信息管理</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{ url_for('.logout') }}">退出登录</a></li>
+                                    </ul>
+                                {% endif %}
+                                {% if current_user.role == 20 %}
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ url_for('company.jobs', company_id=current_user.id)}}">个人主页</a></li>
+                                        <li><a href="{{ url_for('company.detail') }}">信息管理</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{ url_for('.logout') }}">退出登录</a></li>
+                                    </ul>
+                                {% endif %}
+                                {% if current_user.role == 30 %}
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ url_for('admin.index') }}">个人主页</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{ url_for('.logout') }}">退出登录</a></li>
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
- <div class="jumbotron masthead">
-    <div class="container">
-      <h1>JobPlus4-16</h1>
-      <h2>简洁、直观、强悍的找工作网站，让找工作更迅速、简单。</h2>
-    </div>
-  </div>
-              
+        <div class="container-fluid header">
+            {% block head %}{% endblock %}
+        </div>
 
-    <div class="container">
-      {% block body %}{% endblock %}
-      {% block footer %}{% endblock %}
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  </body>
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% block body %}{% endblock %}
+
+            {% block footer %}
+              <div class="footer">
+                  Copyright &copy; 2014-2018 By Zkqiang
+              </div>
+            {% endblock %}
+        </div>
+        {% block tail_js %}
+        <script src="http://labfile.oss.aliyuncs.com/courses/923/week7/code/jquery/3.2.1/jquery.min.js"></script>
+        <script src="http://labfile.oss.aliyuncs.com/courses/923/week7/code/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        {% endblock %}
+    </body>
 </html>

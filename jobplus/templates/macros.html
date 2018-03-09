@@ -1,10 +1,100 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% macro render_form(form, url, upload_file=False) %}
+{% if not upload_file %}
+<form method="POST" action="{{ url }}">
+{% else %}
+<form method="POST" enctype="multipart/form-data" action="{{ url }}">
+{% endif %}
+    {{ form.csrf_token }}
+    {% for field in form %}
+        {% if field.type == "CSRFTokenField" %}
+            {{ "" }}
+        {% elif field.type == "SubmitField" %}
+            {{ form.submit(class="btn btn-primary", type="submit") }}
+        {% elif field.type == "BooleanField" %}
+            <div class="checkbox">
+                <label>{{ field() }} {{ field.label.text }}</label>
+            </div>
+        {% else %}
+            <div class="form-group {% if field.errors %}has-error{% endif %}">
+                {{ field.label }} {{ field(class="form-control") }}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</form>
+{% endmacro %}
 
-</body>
-</html>
+
+{% macro render_pagination(pagination, endpoint) %}
+<nav class="nav-pagination" aria-label="Page navigation">
+  <ul class=pagination>
+  <li>{% if not pagination.has_prev %} class="disabled"{% endif %}><a href="{{url_for(endpoint, page=pagination.prev_num) if pagination.has_prev else '#'}}">&laquo;</a></li>
+  {% for page in pagination.iter_pages() %}
+    {% if page %}
+      {% if page != pagination.page %}
+      <li><a href="{{ url_for(endpoint, page=page) }}">{{ page }}</a></li>
+      {% else %}
+      <li class="active"><a href="#">{{page}} <span class="sr-only">(current)</span></a></li>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  <li>{% if not pagination.has_next %} class="disabled"{% endif %}><a href="{{url_for(endpoint, page=pagination.next_num) if pagination.has_next else '#'}}">&raquo;</a></li>
+  </ul>
+</nav>
+{% endmacro %}
+
+
+{% macro render_company(company) %}
+<div class="col-sm-6 col-md-3 company-item">
+  <div class="thumbnail">
+      <a href="{{ url_for('company.detail', company_id=company.id) }}">
+        <img src="{{ company.detail.logo }}" width="100" height="100" alt="{{ company.detail.name }}">
+      </a>
+      <h4>{{ company.detail.name }}</h4>
+      <p>{{ company.detail.field }} / {{ company.detail.finance_stage }}<br/>
+         {{ company.detail.description | truncate(12, True) }}</p>
+  <hr>
+  <a href="{{ url_for('company.company_jobs', company_id=company.id) }}">
+      <p>
+         {{ company.is_enable_jobs.count() }}<br/>在招职位
+      </p>
+  </a>
+  </div>
+</div>
+{% endmacro %}
+
+
+{% macro render_job(job) %}
+<div class="col-sm-6 col-md-4">
+  <div class="job-box">
+      <div class="caption">
+        <a href="{{ url_for('job.detail', job_id=job.id) }}">
+        <b>{{ job.name }}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </a>
+        <b>{{ job.salary_low }}k-{{ job.salary_high }}k</b><br/>
+        <span>经验{{ job.exp }} / {{ job.degree }}</span><br/>
+        {% for tag in job.tag_list %}
+        <span class="label label-default">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      <hr>
+      <div class="media">
+        <div class="media-left">
+          <a href="{{ url_for('company.detail', company_id=job.company.id) }}">
+            <img class="media-object" src="{{ job.company.detail.logo }}" width="40" height="40" alt="job.company.detail.name">
+          </a>
+        </div>
+        <div class="media-body">
+          <a href="{{ url_for('company.detail', company_id=job.company.id) }}">
+          <h4 class="media-heading">{{ job.company.detail.name }}</h4>
+          </a>
+          <span class="company-meta">{{ job.company.detail.field }}/{{ job.company.detail.finance_stage }}/{{ job.location }}</span>
+          </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
