@@ -1,10 +1,69 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}
+{{ job.name }}
+{% endblock %}
+
+{% block head %}
+<div class="jumbotron">
+  <div class="container">
+    <div class="col-md-8">
+      <h2 style="padding-bottom: 16px">{{ job.name }}</h2>
+      <p>
+          <span class="job-salary" style="font-size: 18px">{{ job.salary_min }}k-{{ job.salary_max }}k
+          </span>&nbsp;&nbsp;{{ job.exp }}经验 / {{ job.education }}
+          <!--{{ share.create(title='分享：', sites='weibo', mobile_sites='weibo') }}-->
+      </p>
+          <span class="timesince">{{ moment(job.updated_at).fromNow(refresh=True) }}发布</span>
+    </div>
+    {% if current_user.role == 10 %}
+      <div class="col-md-4">
+        {% if current_user.is_authenticated and job.current_user_is_applied %}
+          <a class="btn btn-success btn-lg dilivery-btn disabled">已投递</a>
+        {% else %}
+          <a href="{{ url_for('job.send', job_id=job.id) }}" class="btn btn-success btn-lg navbar-btn">投递简历</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-8">
+  <div class="job-detail">
+    <h4>职位诱惑</h4><br>
+    <p>{{ job.treatment }}</p>
+    <br>
+    <h4>职位描述</h4><br>
+    <p>{{ job.description | safe }}</p>
+    <h4>工作地址</h4><br>
+    <p>{{ job.company.address }}</p>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="media">
+  <div class="media-left">
+    <a href="{{ url_for('company.detail', company_id=job.company.id) }}">
+      <img src="{{ job.company.logo }}" class="media-object" height="128" width="128">
+    </a>
+  </div>
+  <div class="media-body">
+  </div>
+</div>
+
+  <h4>{{ job.company.name }}</h4>
+  <p>领域：{{ job.company.field }}</p>
+  <p>融资：{{ job.company.finance_stage }}</p>
+  <p>城市：{{ job.city }}</p>
+  <p>官网：
+    {% if job.company.website %}
+    <a href="{{ job.company.website }}">
+        {{ job.company.website }}
+    </a>
+    {% else %}
+        暂无
+    {% endif %}
+  </p>
+</div>
+{% endblock %}

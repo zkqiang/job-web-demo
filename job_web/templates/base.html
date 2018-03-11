@@ -17,7 +17,7 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -26,7 +26,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">SimpleJob</a>
+                    <a class="navbar-brand" href="/">JobWeb</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
@@ -49,36 +49,27 @@
                             	<a href="{{ url_for('user.register') }}">个人注册</a>
                             </li>
                             <li class="{% if active == 'login' %}active{% endif %}">
-                                <a href="{{ url_for('front.login') }}">登录</a>
+                                <a href="{{ url_for('front.login', next=request.path) }}">登录</a>
                             </li>
                         {% else %}
+                            {% if current_user.role <= 10 %}
+                                    <li><a href="{{ url_for('user.edit') }}">信息管理</a></li>
+                            {% endif %}
+                            {% if current_user.role == 20 %}
+                                    <li><a href="{{ url_for('company.detail', company_id=current_user.id)}}">个人主页</a></li>
+                                    <li><a href="{{ url_for('company.jobs') }}">信息管理</a></li>
+                            {% endif %}
+                            {% if current_user.role == 30 %}
+                                    <li><a href="{{ url_for('admin.index') }}">管理后台</a></li>
+                            {% endif %}
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button", aria-haspopup="true" aria-expanded="false">
-                                    <span id="username">{{ current_user.username }}</span>
-                                    <span class="caret"></span>
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span id="username">{{ current_user.name }}</span>
+                                    <span class="caret navbar-btn"></span>
                                 </a>
-                                {% if current_user.role == 10 %}
-                                    <ul class="dropdown-menu">
-                                        <li><a href="{{ url_for('user.detail') }}">信息管理</a></li>
-                                        <li role="separator" class="divider"></li>
+                                    <ul class="dropdown-menu dropdown-menu-right">
                                         <li><a href="{{ url_for('front.logout') }}">退出登录</a></li>
                                     </ul>
-                                {% endif %}
-                                {% if current_user.role == 20 %}
-                                    <ul class="dropdown-menu">
-                                        <li><a href="{{ url_for('company.jobs', company_id=current_user.id)}}">个人主页</a></li>
-                                        <li><a href="{{ url_for('company.detail') }}">信息管理</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="{{ url_for('front.logout') }}">退出登录</a></li>
-                                    </ul>
-                                {% endif %}
-                                {% if current_user.role == 30 %}
-                                    <ul class="dropdown-menu">
-                                        <li><a href="{{ url_for('admin.index') }}">个人主页</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="{{ url_for('front.logout') }}">退出登录</a></li>
-                                    </ul>
-                                {% endif %}
                             </li>
                         {% endif %}
                     </ul>
@@ -106,11 +97,11 @@
 
             {% block body %}{% endblock %}
 
-            {% block footer %}
-              <div class="footer">
-                  Copyright &copy; 2014-2018 By Zkqiang
-              </div>
-            {% endblock %}
+            <!--{% block footer %}-->
+              <!--<div class="footer">-->
+                  <!--Copyright &copy; 2014-2018 By Zkqiang-->
+              <!--</div>-->
+            <!--{% endblock %}-->
         </div>
         {% block tail_js %}
         <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>

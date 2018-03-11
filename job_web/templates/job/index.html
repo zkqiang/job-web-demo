@@ -1,10 +1,12 @@
-
 {% extends "base.html" %}
 {% from "macros.html" import render_job, render_pagination %}
 
 {% block title %}职位列表{% endblock %}
 
 {% block body %}
+<div class="jumbotron">
+  <h4>Todo: 条件筛选</h4>
+</div>
 
 <div class="job_list">
     {% for job in pagination.items %}

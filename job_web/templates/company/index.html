@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% from "macros.html" import render_pagination, render_company %}
 
-</body>
-</html>
+{% block title %}公司{% endblock %}
+
+
+{% block body %}
+<div class="jumbotron">
+  <h4>Todo: 条件筛选</h4>
+</div>
+
+
+<div class="company-list">
+{% for company in pagination.items %}
+  {{ render_company(company) }}
+{% endfor %}
+</div>
+
+{{ render_pagination(pagination, 'company.index') }}
+{% endblock %}

@@ -1,8 +1,15 @@
 span {
-    float: left;
-    margin: 0 3px;
     color: #999;
+    font-size: 14px;
 }
+
+body { padding-top: 52px; }
+
+h4 { padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+hr { margin: 8px }
 
 .item_con_ul {
     color: #777;
@@ -12,13 +19,13 @@ span {
 .con_ul_li {
     display: block;
     float: left;
-    height: 25px;
+    height: 24px;
     padding: 0 10px;
     margin: 0 10px 10px 0;
     border: 1px solid #ededed;
-    border-radius: 15px;
+    border-radius: 16px;
     background-color: #fff;
-    line-height: 25px;
+    line-height: 24px;
     text-align: center;
 }
 
@@ -57,12 +64,25 @@ ul.item_con_list {
 .s_position_list .list_item_top {
     width: 928px;
     height: 80px;
-    padding: 14px 15px 0;
+    padding: 14px 16px 0;
+}
+
+.col_md-form {
+    margin: 0 auto;
+}
+
+.col_md-form h1{
+    padding: 16px 0;
 }
 
 .form {
     width: 400px;
     margin: 0 auto;
+}
+
+.form h1{
+    width: 400px;
+    padding: 16px 0;
 }
 
 a,
@@ -79,25 +99,25 @@ a:visited {
 
 .job-list,
 .company-list {
-    margin-top: 15px;
+    margin-top: 16px;
 }
 
 .job-box {
-    padding: 13px;
+    padding: 14px;
     border: solid 1px #ddd;
     border-radius: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .job-item {
     border: 1px solid #eee;
     border-left: 5px solid #00b38a;
-    padding: 15px 10px;
-    margin-bottom: 15px;
+    padding: 16px;
+    margin-bottom: 16px;
 }
 
 .list-title {
-    margin: 0 15px;
+    margin: 0 16px;
 }
 
 .company-item {
@@ -106,7 +126,7 @@ a:visited {
 
 .company-detail {
     margin: 30px 0;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .header {
@@ -119,7 +139,7 @@ a:visited {
 }
 
 .list-more-btn {
-    padding: 10px 138px;
+    padding: 10px 148px;
 	color: #5cb85c;
     background-color: #fff;
 }
@@ -127,13 +147,38 @@ a:visited {
 .footer {
     clear: both;
     border-top: 1px solid #eee;
-    padding: 16px 0 24px;
+    padding: 16px 0 16px;
     text-align: center;
-    margin-bottom: 115px;
+    margin-top: 16px;
+    margin-bottom: 16px;
     color: #999;
     font-size: 14px;
  }
 
 .company-meta {
     color: #999;
+}
+
+.submit_btn {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    width: 96px;
+    text-align: center;
+}
+
+.company-detail-jobs {
+	color: #C9C9C9;
+    background-color: #fff;
+}
+
+.item-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    zoom: 1;
+}
+
+.job-salary {
+    float: left;
+    font-size: 16px;
+    color: #fd5f39;
 }

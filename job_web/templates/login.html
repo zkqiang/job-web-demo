@@ -4,8 +4,5 @@
 {% block title %}登录{% endblock %}
 
 {% block body %}
-<div class="form">
-    <h2>登录</h2>
-    {{ render_form(form, url_for("front.login")) }}
-</div>
+    {{ render_form("登录", form, url_for("front.login", next=request.args.get('next')), col_md=False) }}
 {% endblock %}

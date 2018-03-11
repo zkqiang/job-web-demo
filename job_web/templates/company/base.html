@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+招聘管理
+{% endblock %}
+
+{% block body %}
+<div class="row" style="padding-top: 32px">
+  <div class="panel panel-default col-md-3">
+    <h4 class="panel-heading">招聘管理</h4>
+    <div class="list-group panel-body">
+      <a href="{{ url_for('company.edit') }}" class="list-group-item {% if active == 'edit' %}active{% endif %}">企业信息</a>
+      <a href="{{ url_for('company.jobs') }}" class="list-group-item {% if active == 'jobs' %}active{% endif %}">职位管理</a>
+      <a href="{{ url_for('company.jobs') }}" class="list-group-item {% if active == 'resumes' %}active{% endif %}">投递管理</a>
+    </div>
+    <div class="panel-footer">
+    {% block operation %}
+    {% endblock %}
+    </div>
+  </div>
+  <div class="col-md-9">
+    {% block right %}{% endblock %}
+  </div>
+</div>
+{% endblock %}

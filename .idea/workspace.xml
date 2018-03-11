@@ -3,21 +3,38 @@
   <component name="ChangeListManager">
     <list default="true" id="01d1e650-f17b-488b-b939-f9a11bea137a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/jobplus/forms.py" afterPath="$PROJECT_DIR$/jobplus/forms.py" />
-      <change beforePath="$PROJECT_DIR$/jobplus/handlers/company.py" afterPath="$PROJECT_DIR$/jobplus/handlers/company.py" />
-      <change beforePath="$PROJECT_DIR$/jobplus/handlers/front.py" afterPath="$PROJECT_DIR$/jobplus/handlers/front.py" />
-      <change beforePath="$PROJECT_DIR$/jobplus/handlers/job.py" afterPath="$PROJECT_DIR$/jobplus/handlers/job.py" />
-      <change beforePath="$PROJECT_DIR$/jobplus/handlers/user.py" afterPath="$PROJECT_DIR$/jobplus/handlers/user.py" />
-      <change beforePath="$PROJECT_DIR$/jobplus/models.py" afterPath="$PROJECT_DIR$/jobplus/models.py" />
-      <change beforePath="$PROJECT_DIR$/jobplus/templates/base.html" afterPath="$PROJECT_DIR$/jobplus/templates/base.html" />
-      <change beforePath="$PROJECT_DIR$/jobplus/templates/company/register.html" afterPath="$PROJECT_DIR$/jobplus/templates/company/register.html" />
-      <change beforePath="$PROJECT_DIR$/jobplus/templates/index.html" afterPath="$PROJECT_DIR$/jobplus/templates/index.html" />
-      <change beforePath="$PROJECT_DIR$/jobplus/templates/job/edit_job.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jobplus/templates/job/index.html" afterPath="$PROJECT_DIR$/jobplus/templates/job/index.html" />
-      <change beforePath="$PROJECT_DIR$/jobplus/templates/macros.html" afterPath="$PROJECT_DIR$/jobplus/templates/macros.html" />
-      <change beforePath="$PROJECT_DIR$/jobplus/templates/user/register.html" afterPath="$PROJECT_DIR$/jobplus/templates/user/register.html" />
-      <change beforePath="$PROJECT_DIR$/manage.py" afterPath="$PROJECT_DIR$/manage.py" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/f92eda573ddf_init_db.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/job_web/app.py" afterPath="$PROJECT_DIR$/job_web/app.py" />
+      <change beforePath="$PROJECT_DIR$/job_web/config.py" afterPath="$PROJECT_DIR$/job_web/config.py" />
+      <change beforePath="$PROJECT_DIR$/job_web/decorators.py" afterPath="$PROJECT_DIR$/job_web/decorators.py" />
+      <change beforePath="$PROJECT_DIR$/job_web/forms.py" afterPath="$PROJECT_DIR$/job_web/forms.py" />
+      <change beforePath="$PROJECT_DIR$/job_web/handlers/admin.py" afterPath="$PROJECT_DIR$/job_web/handlers/admin.py" />
+      <change beforePath="$PROJECT_DIR$/job_web/handlers/company.py" afterPath="$PROJECT_DIR$/job_web/handlers/company.py" />
+      <change beforePath="$PROJECT_DIR$/job_web/handlers/front.py" afterPath="$PROJECT_DIR$/job_web/handlers/front.py" />
+      <change beforePath="$PROJECT_DIR$/job_web/handlers/job.py" afterPath="$PROJECT_DIR$/job_web/handlers/job.py" />
+      <change beforePath="$PROJECT_DIR$/job_web/handlers/resume.py" afterPath="$PROJECT_DIR$/job_web/handlers/resume.py" />
+      <change beforePath="$PROJECT_DIR$/job_web/handlers/user.py" afterPath="$PROJECT_DIR$/job_web/handlers/user.py" />
+      <change beforePath="$PROJECT_DIR$/job_web/models.py" afterPath="$PROJECT_DIR$/job_web/models.py" />
+      <change beforePath="$PROJECT_DIR$/job_web/static/main.css" afterPath="$PROJECT_DIR$/job_web/static/main.css" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/base.html" afterPath="$PROJECT_DIR$/job_web/templates/base.html" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/base_bkb.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/company/create_job.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/company/detail.html" afterPath="$PROJECT_DIR$/job_web/templates/company/detail.html" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/company/edit.html" afterPath="$PROJECT_DIR$/job_web/templates/company/edit.html" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/company/edit_job.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/company/index.html" afterPath="$PROJECT_DIR$/job_web/templates/company/index.html" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/company/jobs.html" afterPath="$PROJECT_DIR$/job_web/templates/company/jobs.html" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/company/register.html" afterPath="$PROJECT_DIR$/job_web/templates/company/register.html" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/company/resumes.html" afterPath="$PROJECT_DIR$/job_web/templates/company/resumes.html" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/job/detail.html" afterPath="$PROJECT_DIR$/job_web/templates/job/detail.html" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/job/index.html" afterPath="$PROJECT_DIR$/job_web/templates/job/index.html" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/login.html" afterPath="$PROJECT_DIR$/job_web/templates/login.html" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/macros.html" afterPath="$PROJECT_DIR$/job_web/templates/macros.html" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/resume/create.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/resume/edit.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/user/edit.html" afterPath="$PROJECT_DIR$/job_web/templates/user/edit.html" />
+      <change beforePath="$PROJECT_DIR$/job_web/templates/user/register.html" afterPath="$PROJECT_DIR$/job_web/templates/user/register.html" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/bfc64162705b_init_db.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/test_data.py" afterPath="$PROJECT_DIR$/test_data.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,28 +60,112 @@
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="job_web@localhost" type="feb32156:DbDataSourceImpl" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="job_web@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="job_web@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="job_web: schema" type="c314c289:MysqlImplModel$Schema" />
-      </path>
     </expand>
     <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="manage.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/manage.py">
+      <file leaf-file-name="company.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/job_web/handlers/company.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="381">
+              <caret line="74" column="17" lean-forward="false" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
+              <folding>
+                <element signature="e#47#145#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="job.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/job_web/handlers/job.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-153">
+              <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+              <folding>
+                <element signature="e#47#151#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="resume.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/job_web/handlers/resume.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="e#47#139#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/job_web/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="197">
+              <caret line="71" column="10" lean-forward="false" selection-start-line="71" selection-start-column="10" selection-end-line="71" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/job_web/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1043">
+              <caret line="154" column="26" lean-forward="false" selection-start-line="154" selection-start-column="26" selection-end-line="154" selection-end-column="26" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/job_web/static/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="419">
+              <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="macros.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/job_web/templates/macros.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+              <folding>
+                <element signature="e#1647#1654#1" expanded="true" />
+                <element signature="e#2163#2170#1" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#a#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="e#3427#3433#1" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/job_web/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="41" column="25" lean-forward="true" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/job_web/templates/company/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="11" column="53" lean-forward="true" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="69" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -75,38 +176,52 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>current</find>
-      <find>&quot;</find>
-      <find>role</find>
-      <find>login</find>
-      <find>register</find>
-      <find>regi</find>
-      <find>render_form</find>
-      <find>render_pagination</find>
-      <find>backref</find>
-      <find>'.</find>
-      <find>logo</find>
-      <find>name</find>
-      <find>job</find>
-      <find>degree</find>
-      <find>detail</find>
-      <find>render_job</find>
-      <find>username</find>
-      <find>在招职位</find>
-      <find>thumbnail</find>
-      <find>flash</find>
-      <find>location</find>
-      <find>class=&quot;disabled&quot;</find>
+      <find>enable_jobs</find>
+      <find>enabled_jobs</find>
+      <find>disable_job</find>
+      <find>redirect_job_index(job_data)</find>
+      <find>margin-bottom</find>
+      <find>btn-group-justified</find>
+      <find>13</find>
+      <find>dilivery-btn</find>
+      <find>is_submitted</find>
+      <find>obj=</find>
+      <find>item_title_date</find>
+      <find>job-salary</find>
+      <find>job-</find>
+      <find>container</find>
+      <find>main</find>
+      <find>400</find>
+      <find>body</find>
+      <find>company-detail</find>
+      <find>job-item</find>
+      <find>help-block</find>
+      <find>url</find>
+      <find>hr</find>
+      <find>&lt;hr</find>
+      <find>pagination</find>
+      <find>INDEX_PER_PAGE</find>
+      <find>is_enable</find>
+      <find>list-group-item</find>
+      <find>btn-admin</find>
+      <find>form</find>
+      <find>job_delivery</find>
     </findStrings>
     <replaceStrings>
       <replace>'</replace>
       <replace>'front.</replace>
       <replace>name</replace>
+      <replace>pagination</replace>
+      <replace>enabled_jobs</replace>
+      <replace>enabled_jobs()</replace>
+      <replace>redirect_job_index(job_data.company.id)</replace>
+      <replace>14</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -115,10 +230,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/../jobplus4-16/jobplus/forms.py" />
-        <option value="$PROJECT_DIR$/jobplus/decorators.py" />
-        <option value="$PROJECT_DIR$/jobplus/handlers/admin.py" />
         <option value="$PROJECT_DIR$/jobplus/app.py" />
         <option value="$PROJECT_DIR$/jobplus/config.py" />
         <option value="$PROJECT_DIR$/jobplus/templates/company/register.html" />
@@ -137,8 +248,39 @@
         <option value="$PROJECT_DIR$/jobplus/models.py" />
         <option value="$PROJECT_DIR$/jobplus/forms.py" />
         <option value="$PROJECT_DIR$/jobplus/templates/macros.html" />
-        <option value="$PROJECT_DIR$/test_data.py" />
         <option value="$PROJECT_DIR$/manage.py" />
+        <option value="$PROJECT_DIR$/job_web/templates/company/create_job.html" />
+        <option value="$PROJECT_DIR$/job_web/templates/job/index.html" />
+        <option value="$PROJECT_DIR$/job_web/templates/company/index.html" />
+        <option value="$PROJECT_DIR$/job_web/app.py" />
+        <option value="$PROJECT_DIR$/job_web/templates/user/detail.html" />
+        <option value="$PROJECT_DIR$/test_data.py" />
+        <option value="$PROJECT_DIR$/job_web/decorators.py" />
+        <option value="$PROJECT_DIR$/job_web/templates/admin/base.html" />
+        <option value="$PROJECT_DIR$/job_web/templates/job/create.html" />
+        <option value="$PROJECT_DIR$/job_web/templates/login.html" />
+        <option value="$PROJECT_DIR$/job_web/templates/company/register.html" />
+        <option value="$PROJECT_DIR$/job_web/templates/user/register.html" />
+        <option value="$PROJECT_DIR$/job_web/handlers/front.py" />
+        <option value="$PROJECT_DIR$/job_web/templates/company/edit.html" />
+        <option value="$PROJECT_DIR$/job_web/templates/base.html" />
+        <option value="$PROJECT_DIR$/job_web/templates/job/edit.html" />
+        <option value="$PROJECT_DIR$/job_web/templates/job/detail.html" />
+        <option value="$PROJECT_DIR$/job_web/templates/company/detail.html" />
+        <option value="$PROJECT_DIR$/job_web/templates/user/edit.html" />
+        <option value="$PROJECT_DIR$/job_web/handlers/user.py" />
+        <option value="$PROJECT_DIR$/job_web/handlers/admin.py" />
+        <option value="$PROJECT_DIR$/job_web/templates/company/base.html" />
+        <option value="$PROJECT_DIR$/job_web/templates/company/jobs.html" />
+        <option value="$PROJECT_DIR$/job_web/config.py" />
+        <option value="$PROJECT_DIR$/job_web/templates/macros.html" />
+        <option value="$PROJECT_DIR$/job_web/static/main.css" />
+        <option value="$PROJECT_DIR$/job_web/templates/company/resumes.html" />
+        <option value="$PROJECT_DIR$/job_web/handlers/resume.py" />
+        <option value="$PROJECT_DIR$/job_web/handlers/job.py" />
+        <option value="$PROJECT_DIR$/job_web/forms.py" />
+        <option value="$PROJECT_DIR$/job_web/handlers/company.py" />
+        <option value="$PROJECT_DIR$/job_web/models.py" />
       </list>
     </option>
   </component>
@@ -148,9 +290,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="706" />
-    <option name="y" value="144" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="493" />
+    <option name="y" value="109" />
     <option name="width" value="1399" />
     <option name="height" value="1277" />
   </component>
@@ -170,6 +312,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -180,18 +323,30 @@
             <path>
               <item name="Job-Web-Demo" type="b2602c69:ProjectViewProjectNode" />
               <item name="Job-Web-Demo" type="462c0819:PsiDirectoryNode" />
-              <item name="jobplus" type="462c0819:PsiDirectoryNode" />
+              <item name="job_web" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Job-Web-Demo" type="b2602c69:ProjectViewProjectNode" />
               <item name="Job-Web-Demo" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+              <item name="job_web" type="462c0819:PsiDirectoryNode" />
+              <item name="handlers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Job-Web-Demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Job-Web-Demo" type="462c0819:PsiDirectoryNode" />
+              <item name="job_web" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Job-Web-Demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Job-Web-Demo" type="462c0819:PsiDirectoryNode" />
+              <item name="job_web" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -201,6 +356,7 @@
     <property name="add_unversioned_files" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.mongoOptions" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -273,20 +429,19 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="2578" height="1408" extended-state="7" />
+    <frame x="-9" y="-9" width="2578" height="1408" extended-state="6" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32983023" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32983023" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981133" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2934519" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14257188" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2934519" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14257188" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17452076" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981133" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298722" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -295,8 +450,32 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32983023" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981133" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2934519" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14257188" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981133" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298722" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -315,184 +494,196 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://D:/Anaconda3/Lib/site-packages/wtforms/fields/core.py">
+    <entry file="file://D:/Anaconda3/Lib/site-packages/flask/helpers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="737">
-          <caret line="473" column="0" lean-forward="true" selection-start-line="473" selection-start-column="0" selection-end-line="473" selection-end-column="0" />
+        <state relative-caret-position="-2755">
+          <caret line="193" column="4" lean-forward="false" selection-start-line="193" selection-start-column="4" selection-end-line="193" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Anaconda3/Lib/site-packages/werkzeug/datastructures.py">
+    <entry file="file://D:/Anaconda3/Lib/site-packages/flask/blueprints.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="278" column="8" lean-forward="false" selection-start-line="278" selection-start-column="8" selection-end-line="278" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Anaconda3/Lib/site-packages/werkzeug/local.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="291" column="8" lean-forward="false" selection-start-line="291" selection-start-column="8" selection-end-line="291" selection-end-column="8" />
+        <state relative-caret-position="-2166">
+          <caret line="173" column="0" lean-forward="true" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Anaconda3/Lib/site-packages/flask_login/utils.py">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/company/edit_job.html" />
+    <entry file="file://$PROJECT_DIR$/../ProxyPool/proxypool/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-263">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ProxyPool/proxypool/dbop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2379">
+          <caret line="20" column="45" lean-forward="true" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ProxyPool/proxypool/schedule/adder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ProxyPool/proxypool/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="21" lean-forward="false" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ProxyPool/proxypool/schedule/scheduler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ProxyPool/proxypool/schedule/tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/templates/resume/create.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/templates/user/detail.html" />
+    <entry file="file://$PROJECT_DIR$/job_web/templates/resume/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="851">
+          <caret line="58" column="16" lean-forward="false" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/decorators.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
-          <caret line="25" column="23" lean-forward="false" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
-          <folding />
+          <caret line="13" column="32" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="48" />
+          <folding>
+            <element signature="e#47#74#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Anaconda3/Lib/site-packages/flask/templating.py">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/user/register.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="111" column="4" lean-forward="false" selection-start-line="111" selection-start-column="4" selection-end-line="111" selection-end-column="4" />
-          <folding />
+        <state relative-caret-position="138">
+          <caret line="6" column="71" lean-forward="false" selection-start-line="6" selection-start-column="71" selection-end-line="6" selection-end-column="71" />
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Anaconda3/Lib/site-packages/flask_uploads.py">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="114" column="4" lean-forward="false" selection-start-line="114" selection-start-column="4" selection-end-line="114" selection-end-column="4" />
-          <folding />
+        <state relative-caret-position="138">
+          <caret line="6" column="84" lean-forward="true" selection-start-line="6" selection-start-column="84" selection-end-line="6" selection-end-column="98" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/base_bkb.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/resume/edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/handlers/resume.py">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/job/edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <caret line="11" column="14" lean-forward="false" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/814a8b42-a687-4c1c-b076-cfef2993c233/console.sql">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/job/create.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/templates/job/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="13" column="29" lean-forward="false" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/templates/admin/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/templates/admin/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f5f6662f-eab7-4ab8-9d4f-470317cd6a99/console.sql">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/admin/job.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Anaconda3/Lib/site-packages/sqlalchemy/sql/schema.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5936">
-          <caret line="897" column="8" lean-forward="false" selection-start-line="897" selection-start-column="8" selection-end-line="897" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/-2036615904/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="794" column="8" lean-forward="false" selection-start-line="794" selection-start-column="8" selection-end-line="794" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Anaconda3/Lib/site-packages/sqlalchemy/ext/declarative/api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1375">
-          <caret line="248" column="4" lean-forward="false" selection-start-line="248" selection-start-column="4" selection-end-line="248" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-241">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/admin/index.html">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/admin/resume.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/admin/job.html">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/admin/user.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/admin/resume.html">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/admin/company.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/admin/user.html">
+    <entry file="file://$PROJECT_DIR$/job_web/handlers/front.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="947">
+          <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/admin/company.html">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/company/register.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="138">
+          <caret line="6" column="74" lean-forward="false" selection-start-line="6" selection-start-column="74" selection-end-line="6" selection-end-column="74" />
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Anaconda3/Lib/site-packages/faker/factory.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Anaconda3/Lib/random.py">
+    <entry file="file://D:/Anaconda3/Lib/site-packages/wtforms/form.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="86" column="8" lean-forward="false" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="8" />
@@ -500,221 +691,188 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Anaconda3/Lib/site-packages/faker/generator.py">
+    <entry file="file://$PROJECT_DIR$/job_web/handlers/user.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-          <folding>
-            <element signature="e#16#55#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="736">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Anaconda3/Lib/site-packages/faker/__init__.py">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/user/edit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="33" lean-forward="false" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
-          <folding />
+        <state relative-caret-position="184">
+          <caret line="8" column="63" lean-forward="false" selection-start-line="8" selection-start-column="63" selection-end-line="8" selection-end-column="63" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datas/test_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="5" lean-forward="true" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/decorators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/test_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="920">
-          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/handlers/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/user/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="14" lean-forward="false" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/company/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="14" lean-forward="true" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/handlers/user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="17" column="60" lean-forward="false" selection-start-line="17" selection-start-column="60" selection-end-line="17" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/handlers/company.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="18" column="63" lean-forward="false" selection-start-line="18" selection-start-column="63" selection-end-line="18" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/base.html">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/company/detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
-          <caret line="1" column="13" lean-forward="false" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-          <folding />
+          <caret line="1" column="47" lean-forward="false" selection-start-line="1" selection-start-column="47" selection-end-line="1" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/handlers/job.py">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/company/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/company/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="7" lean-forward="false" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2216">
-          <caret line="144" column="0" lean-forward="true" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/job/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/handlers/front.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="14" lean-forward="true" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/static/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3105">
-          <caret line="135" column="0" lean-forward="true" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobplus/templates/macros.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1472">
-          <caret line="82" column="51" lean-forward="false" selection-start-line="82" selection-start-column="51" selection-end-line="82" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="21" lean-forward="false" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="14" lean-forward="false" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/job_web/handlers/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="23">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="65" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/job_web/handlers/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-345">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="-276">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manage.py">
+    <entry file="file://$PROJECT_DIR$/job_web/templates/company/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/wtforms/fields/core.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="570" column="35" lean-forward="false" selection-start-line="570" selection-start-column="35" selection-end-line="570" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/wtforms/validators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="196" column="8" lean-forward="false" selection-start-line="196" selection-start-column="8" selection-end-line="196" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <caret line="6" column="29" lean-forward="true" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="31" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/templates/job/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" column="14" lean-forward="true" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/templates/company/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="53" lean-forward="true" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="69" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/templates/company/resumes.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/templates/company/jobs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/templates/macros.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding>
+            <element signature="e#1647#1654#1" expanded="true" />
+            <element signature="e#2163#2170#1" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#a#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="e#3427#3433#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="41" column="25" lean-forward="true" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/static/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/handlers/job.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="e#47#151#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1043">
+          <caret line="154" column="26" lean-forward="false" selection-start-line="154" selection-start-column="26" selection-end-line="154" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/handlers/resume.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#47#139#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/handlers/company.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="74" column="17" lean-forward="false" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
+          <folding>
+            <element signature="e#47#145#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/job_web/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="71" column="10" lean-forward="false" selection-start-line="71" selection-start-column="10" selection-end-line="71" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

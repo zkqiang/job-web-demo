@@ -1,8 +1,8 @@
-"""init db
+"""empty message
 
-Revision ID: bfc64162705b
+Revision ID: cd4cc54be0f9
 Revises: 
-Create Date: 2018-03-09 14:49:01.395587
+Create Date: 2018-03-10 22:31:37.579221
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'bfc64162705b'
+revision = 'cd4cc54be0f9'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,57 +21,62 @@ def upgrade():
     op.create_table('company',
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.Column('name', sa.String(length=64), nullable=False),
     sa.Column('email', sa.String(length=64), nullable=False),
     sa.Column('password', sa.String(length=128), nullable=False),
     sa.Column('role', sa.SmallInteger(), nullable=True),
     sa.Column('is_enable', sa.Boolean(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=64), nullable=False),
     sa.Column('website', sa.String(length=64), nullable=True),
     sa.Column('address', sa.String(length=256), nullable=True),
     sa.Column('logo', sa.String(length=256), nullable=True),
     sa.Column('finance_stage', sa.String(length=128), nullable=True),
     sa.Column('field', sa.String(length=64), nullable=True),
-    sa.Column('profile', sa.String(length=1024), nullable=True),
-    sa.Column('detail', sa.Text(), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.Column('description', sa.String(length=1024), nullable=True),
+    sa.Column('details', sa.Text(), nullable=True),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email'),
+    sa.UniqueConstraint('name')
     )
-    op.create_index(op.f('ix_company_email'), 'company', ['email'], unique=True)
-    op.create_index(op.f('ix_company_name'), 'company', ['name'], unique=True)
+    op.create_index(op.f('ix_company_is_enable'), 'company', ['is_enable'], unique=False)
     op.create_table('user',
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.Column('name', sa.String(length=64), nullable=False),
     sa.Column('email', sa.String(length=64), nullable=False),
     sa.Column('password', sa.String(length=128), nullable=False),
     sa.Column('role', sa.SmallInteger(), nullable=True),
     sa.Column('is_enable', sa.Boolean(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=16), nullable=False),
     sa.Column('resume', sa.String(length=128), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email')
     )
-    op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
-    op.create_index(op.f('ix_user_name'), 'user', ['name'], unique=True)
+    op.create_index(op.f('ix_user_is_enable'), 'user', ['is_enable'], unique=False)
     op.create_table('job',
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=32), nullable=True),
-    sa.Column('salary_min', sa.Integer(), nullable=False),
-    sa.Column('salary_max', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=32), nullable=False),
+    sa.Column('salary_min', sa.SmallInteger(), nullable=False),
+    sa.Column('salary_max', sa.SmallInteger(), nullable=False),
     sa.Column('company_id', sa.Integer(), nullable=True),
     sa.Column('description', sa.Text(), nullable=True),
     sa.Column('treatment', sa.Text(), nullable=True),
     sa.Column('exp', sa.String(length=16), nullable=False),
     sa.Column('education', sa.String(length=16), nullable=False),
-    sa.Column('stacks', sa.String(length=128), nullable=True),
-    sa.Column('location', sa.String(length=32), nullable=True),
+    sa.Column('city', sa.String(length=8), nullable=True),
     sa.Column('tags', sa.String(length=64), nullable=True),
     sa.Column('is_enable', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['company_id'], ['company.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index(op.f('ix_job_name'), 'job', ['name'], unique=False)
+    op.create_index(op.f('ix_job_company_id'), 'job', ['company_id'], unique=False)
+    op.create_index(op.f('ix_job_education'), 'job', ['education'], unique=False)
+    op.create_index(op.f('ix_job_exp'), 'job', ['exp'], unique=False)
+    op.create_index(op.f('ix_job_is_enable'), 'job', ['is_enable'], unique=False)
+    op.create_index(op.f('ix_job_salary_max'), 'job', ['salary_max'], unique=False)
+    op.create_index(op.f('ix_job_salary_min'), 'job', ['salary_min'], unique=False)
     op.create_table('delivery',
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
@@ -91,12 +96,15 @@ def upgrade():
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
     op.drop_table('delivery')
-    op.drop_index(op.f('ix_job_name'), table_name='job')
+    op.drop_index(op.f('ix_job_salary_min'), table_name='job')
+    op.drop_index(op.f('ix_job_salary_max'), table_name='job')
+    op.drop_index(op.f('ix_job_is_enable'), table_name='job')
+    op.drop_index(op.f('ix_job_exp'), table_name='job')
+    op.drop_index(op.f('ix_job_education'), table_name='job')
+    op.drop_index(op.f('ix_job_company_id'), table_name='job')
     op.drop_table('job')
-    op.drop_index(op.f('ix_user_name'), table_name='user')
-    op.drop_index(op.f('ix_user_email'), table_name='user')
+    op.drop_index(op.f('ix_user_is_enable'), table_name='user')
     op.drop_table('user')
-    op.drop_index(op.f('ix_company_name'), table_name='company')
-    op.drop_index(op.f('ix_company_email'), table_name='company')
+    op.drop_index(op.f('ix_company_is_enable'), table_name='company')
     op.drop_table('company')
     # ### end Alembic commands ###

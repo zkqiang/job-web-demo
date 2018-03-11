@@ -1,10 +1,11 @@
 from flask import Flask
-from jobplus.config import configs
-from jobplus.models import db, User, Company
+from job_web.config import configs
+from job_web.models import db, User, Company
 from flask_ckeditor import CKEditor
 from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_login import LoginManager
+from flask_share import Share
 from flask_uploads import UploadSet, configure_uploads, patch_request_class
 
 uploaded_pdf = UploadSet('pdf', ('pdf', ))
@@ -15,6 +16,10 @@ def register_extensions(app):
     Migrate(app, db)
     CKEditor(app)
     Moment(app)
+    share = Share(app)
+    share.init_app(app)
+    login_manager = LoginManager()
+    login_manager.init_app(app)
     configure_uploads(app, uploaded_pdf)
     patch_request_class(app, app.config['UPLOADED_PDF_SIZE'])
     login_manager = LoginManager()
@@ -26,7 +31,6 @@ def register_extensions(app):
             return User.query.get(id)
         elif Company.query.get(id):
             return Company.query.get(id)
-
     login_manager.login_view = 'front.login'
     login_manager.login_message = '该页面需要登录后访问'
 

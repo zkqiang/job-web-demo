@@ -1,52 +1,55 @@
-{% macro render_form(form, url, upload_file=False) %}
-{% if not upload_file %}
-<form method="POST" action="{{ url }}">
-{% else %}
-<form method="POST" enctype="multipart/form-data" action="{{ url }}">
-{% endif %}
-    {{ form.csrf_token }}
-    {% for field in form %}
-        {% if field.type == "CSRFTokenField" %}
-            {{ "" }}
-        {% elif field.type == "SubmitField" %}
-            {{ form.submit(class="btn btn-primary", type="submit") }}
-        {% elif field.type == "BooleanField" %}
-            <div class="checkbox">
-                <label>{{ field() }} {{ field.label.text }}</label>
-            </div>
-        {% else %}
-            <div class="form-group {% if field.errors %}has-error{% endif %}">
-                {{ field.label }} {{ field(class="form-control") }}
-                {% if field.errors %}
-                    {% for error in field.errors %}
-                        <span class="help-block">{{ error }}</span>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        {% endif %}
-    {% endfor %}
-</form>
+{% macro render_form(title, form, url, upload_file=False, col_md=True) %}
+<div class="{% if col_md %} col_md-form {% else %} form {% endif %}">
+    <h1>{{ title }}</h1>
+    <form method="POST" enctype="multipart/form-data" action="{{ url }}">
+        {{ form.csrf_token }}
+        {% for field in form %}
+            {% if field.type == "CSRFTokenField" %}
+                {{ "" }}
+            {% elif field.type == "SubmitField" %}
+                {{ form.submit(class="btn btn-primary center-block submit_btn", type="submit") }}
+            {% elif field.type == "BooleanField" %}
+                <div class="checkbox">
+                    <label>{{ field() }} {{ field.label.text }}</label>
+                </div>
+            {% elif field.type == "FileField" %}
+                <label>上传简历</label>
+                <input type="file">
+                <p class="help-block">仅支持PDF格式</p>
+            {% else %}
+                <div class="form-group {% if field.errors %}has-error{% endif %}">
+                    {{ field.label }} {{ field(class="form-control") }}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <div class="help-block">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </form>
+</div>
 {% endmacro %}
 
 
 {% macro render_pagination(pagination, endpoint) %}
 <nav class="nav-pagination" aria-label="Page navigation">
-  <ul class=pagination>
-  {% if pagination.has_prev %}
-      <li><a href="{{url_for(endpoint, page=pagination.prev_num) if pagination.has_prev else '#'}}">&laquo;</a></li>
-  {% endif %}
-  {% for page in pagination.iter_pages() %}
-    {% if page %}
-      {% if page != pagination.page %}
-      <li><a href="{{ url_for(endpoint, page=page) }}">{{ page }}</a></li>
-      {% else %}
-      <li class="active"><a href="#">{{page}} <span class="sr-only">(current)</span></a></li>
-      {% endif %}
+  <ul class="pagination">
+    {% if pagination.has_prev %}
+        <li><a href="{{url_for(endpoint, page=pagination.prev_num)}}">&laquo;</a></li>
     {% endif %}
-  {% endfor %}
-  {% if pagination.has_prev %}
-      <li><a href="{{url_for(endpoint, page=pagination.next_num) if pagination.has_next else '#'}}">&raquo;</a></li>
-  {% endif %}
+      {% for page in pagination.iter_pages() %}
+        {% if page %}
+          {% if page != pagination.page %}
+          <li><a href="{{ url_for(endpoint, page=page) }}">{{ page }}</a></li>
+          {% else %}
+          <li class="active"><a class="disabled">{{page}} <span class="sr-only">(current)</span></a></li>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% if pagination.has_next %}
+        <li><a href="{{url_for(endpoint, page=pagination.next_num)}}">&raquo;</a>  </li>
+    {% endif %}
   </ul>
 </nav>
 {% endmacro %}
@@ -58,12 +61,11 @@
       <a href="{{ url_for('company.detail', company_id=company.id) }}">
         <img src="{{ company.logo }}" width="100" height="100" alt="{{ company.name }}">
       </a>
-      <h4>{{ company.name }}</h4>
-      <p>{{ company.field }} / {{ company.finance_stage }}<br/>
-         {{ company.description | truncate(12, True) }}</p>
+      <h4><a href="{{ url_for('company.detail', company_id=company.id) }}">{{ company.name }}</a></h4>
+      <p>{{ company.field }} / {{ company.finance_stage }}</p>
   <hr>
   <a href="{{ url_for('company.jobs', company_id=company.id) }}">
-      <p>
+      <p style="padding-bottom: 10px">
          {{ company.enabled_jobs().count() }}<br/>在招职位
       </p>
   </a>
@@ -79,11 +81,12 @@
         <a href="{{ url_for('job.detail', job_id=job.id) }}">
         <b>{{ job.name }}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </a>
-        <b>{{ job.salary_min }}k-{{ job.salary_max }}k</b><br/>
+        <span class="salary">{{ job.salary_min }}k-{{ job.salary_max }}k</span><br/>
         <span>{{ job.exp }}经验 / {{ job.education }}</span><br/>
         {% for tag in job.tag_list %}
-        <span class="label label-default">{{ tag }}</span>
+        <span class="label label-primary">{{ tag }}</span>
         {% endfor %}
+        <span>&nbsp;</span>
       </div>
       <hr>
       <div class="media">

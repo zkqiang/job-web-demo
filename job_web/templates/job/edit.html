@@ -1,0 +1,14 @@
+{% if current_user.is_admin() %}
+    {% extends "admin/base.html" %}
+{% elif current_user.is_company() %}
+    {% extends "company/base.html" %}
+{% endif %}
+{% from "macros.html" import render_form %}
+
+{% block title %}
+编辑职位
+{% endblock %}
+
+{% block right %}
+    {{ render_form('编辑职位', form, url_for('job.edit', job_id=job_id)) }}
+{% endblock %}

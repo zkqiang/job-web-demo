@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "company/company_base.html" %}
 
-</body>
-</html>
+{% block title %}
+简历管理
+{% endblock %}
+
+{% block operation %}
+<a href="{{ url_for('company.company_job_apply', company_id=company_id, status='waiting') }}" type="button" class="btn btn-success btn-admin">未处理</a>
+<a href="{{ url_for('company.company_job_apply', company_id=company_id, status='accept') }}" type="button" class="btn btn-success btn-admin">面试</a>
+<a href="{{ url_for('company.company_job_apply', company_id=company_id, status='reject') }}" type="button" class="btn btn-success btn-admin">不合适</a>
+{% endblock %}
+
+{% block admin %}
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>职位名称</th>
+      <th>求职者姓名</th>
+      <th>简历</th>
+      <th>投递时间</th>
+      <th>操作</th>
+    </tr>
+    <tbody>
+      {%for delivery in pagination.items %}
+      <tr>
+        <td>{{ delivery.id }}</td>
+        <td>{{ delivery.job.name }}</td>
+        <td>{{ delivery.user.username }}</td>
+        <td><a href="{{ delivery.user.resume_url }}" type="button" class="btn btn-default btn-sm" target="_blank">查看</a></td>
+        <td>{{ delivery.created_at }}</td>
+        <td>
+            <div class="btn-group" role="group">
+              <a href="{{ url_for('company.company_job_apply_accept', company_id=company_id, delivery_id=delivery.id) }}" type="button" class="btn btn-default" title="面试">
+                  面试
+              </a>
+              <a href="{{ url_for('company.company_job_apply_reject', company_id=company_id, delivery_id=delivery.id) }}" type="button" class="btn btn-default" title="拒绝">
+                  拒绝
+              </a>
+            </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </thead>
+</table>
+{% endblock %}

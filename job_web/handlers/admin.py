@@ -20,36 +20,36 @@ def index():
 @admin_required
 def user():
     page = request.args.get('page', default=1, type=int)
-    content = User.query.paginate(
+    pagination = User.query.paginate(
         page=page,
         per_page=current_app.config['LIST_PER_PAGE'],
         error_out=False
     )
-    return render_template('admin/user.html', content=content)
+    return render_template('admin/user.html', pagination=pagination)
 
 
 @admin.route('/company')
 @admin_required
 def company():
     page = request.args.get('page', default=1, type=int)
-    content = Company.query.paginate(
+    pagination = Company.query.paginate(
         page=page,
         per_page=current_app.config['LIST_PER_PAGE'],
         error_out=False
     )
-    return render_template('admin/company.html', content=content)
+    return render_template('admin/company.html', pagination=pagination)
 
 
 @admin.route('/job')
 @admin_required
 def job():
     page = request.args.get('page', default=1, type=int)
-    content = Job.query.paginate(
+    pagination = Job.query.paginate(
         page=page,
         per_page=current_app.config['LIST_PER_PAGE'],
         error_out=False
     )
-    return render_template('admin/job.html', content=content)
+    return render_template('admin/job.html', pagination=pagination)
 
 
 # @admin.route('/resume')

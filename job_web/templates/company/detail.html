@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% from "macros.html" import render_pagination %}
 
-</body>
-</html>
+{% block title %}
+{{ company.name }}
+{% endblock %}
+
+{% block head %}
+<div class="jumbotron">
+  <div class="container">
+    <div class="col-md-3">
+      <div class="thumbnail">
+        <img src="{{ company.logo }}" >
+      </div>
+    </div>
+    <div class="col-md-9">
+      <h2>{{ company.name }}</h2>
+      <p>{{ company.description }}</p>
+      <a href="{{ company.address }}">{{ company.address }}</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-8">
+  <ul class="nav nav-tabs">
+      <li role="presentation" class="{% if panel == 'about' %}active{% endif %}">
+        <a href="{{ url_for('company.detail', company_id=company.id) }}">公司介绍</a>
+      </li>
+      <li role="presentation" class="{% if panel == 'jobs' %}active{% endif %}">
+        <a href="{{ url_for('company.detail', company_id=company.id, job='job') }}">在招职位({{ company.enabled_jobs().count() }})</a>
+      </li>
+  </ul>
+    {% if panel == 'about' %}
+      <div class="company-detail">
+        {{ company.description }}
+      </div>
+    {% else %}
+      <ul class="company-detail list-group">
+        {% for job in company.enabled_jobs() %}
+          <li class="job-item list-group-item">
+            <a href="{{ url_for('job.detail', job_id=job.id) }}">
+            <div class="item-title">{{ job.name }}</div>
+            <p>
+              <span class="job-salary">{{ job.salary_min }}k-{{ job.salary_max }}k</span>
+              <span class="job-meta">&nbsp;&nbsp;{{ job.exp }}经验 / {{ job.education }}</span>
+            </p>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+      {{ render_pagination(pagination, 'company.index') }}
+      {% endif %}
+</div>
+<div class="col-md-4">
+  <h4>公司基本信息</h4>
+  <p>领域：{{ company.field }}</p>
+  <p>融资：{{ company.finance_stage }}</p>
+  <p>城市：{{ company.location }}</p>
+</div>
+{% endblock %}

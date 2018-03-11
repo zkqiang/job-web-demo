@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% from "macros.html" import render_form %}
 
-</body>
-</html>
+{% block title %}
+个人信息管理
+{% endblock %}
+
+{% block body %}
+{{ render_form('个人信息', form, url_for('user.edit'), col_md=False)}}
+{% endblock %}
