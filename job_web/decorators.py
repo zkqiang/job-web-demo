@@ -4,7 +4,7 @@
 from functools import wraps
 from flask import abort
 from flask_login import current_user
-from .models import ROLE_COMPANY, ROLE_ADMIN
+from .models import User
 
 
 def role_required(role):
@@ -18,5 +18,5 @@ def role_required(role):
     return decorator
 
 
-company_required = role_required(ROLE_COMPANY)
-admin_required = role_required(ROLE_ADMIN)
+company_required = role_required(User.ROLE_COMPANY)
+admin_required = role_required(User.ROLE_ADMIN)

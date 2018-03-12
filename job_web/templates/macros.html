@@ -1,7 +1,7 @@
-{% macro render_form(title, form, url, upload_file=False, col_md=True) %}
+{% macro render_form(title, form, url, upload=False, col_md=True) %}
 <div class="{% if col_md %} col_md-form {% else %} form {% endif %}">
     <h1>{{ title }}</h1>
-    <form method="POST" enctype="multipart/form-data" action="{{ url }}">
+    <form method="POST" enctype="{% if upload %}multipart/form-data{% endif %}" action="{{ url }}">
         {{ form.csrf_token }}
         {% for field in form %}
             {% if field.type == "CSRFTokenField" %}
@@ -13,9 +13,11 @@
                     <label>{{ field() }} {{ field.label.text }}</label>
                 </div>
             {% elif field.type == "FileField" %}
-                <label>上传简历</label>
-                <input type="file">
-                <p class="help-block">仅支持PDF格式</p>
+                <label>{{ field.label }}</label>
+                {{ field() }}
+                {% for error in field.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
             {% else %}
                 <div class="form-group {% if field.errors %}has-error{% endif %}">
                     {{ field.label }} {{ field(class="form-control") }}
@@ -33,6 +35,7 @@
 
 
 {% macro render_pagination(pagination, endpoint) %}
+{% if pagination.pages > 1 %}
 <nav class="nav-pagination" aria-label="Page navigation">
   <ul class="pagination">
     {% if pagination.has_prev %}
@@ -52,6 +55,7 @@
     {% endif %}
   </ul>
 </nav>
+{% endif %}
 {% endmacro %}
 
 

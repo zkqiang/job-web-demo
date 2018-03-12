@@ -53,14 +53,22 @@
                             </li>
                         {% else %}
                             {% if current_user.role <= 10 %}
-                                    <li><a href="{{ url_for('user.edit') }}">信息管理</a></li>
+                                <li class="{% if active == 'edit' %}active{% endif %}">
+                                    <a href="{{ url_for('user.edit') }}">信息管理</a>
+                                </li>
                             {% endif %}
                             {% if current_user.role == 20 %}
-                                    <li><a href="{{ url_for('company.detail', company_id=current_user.id)}}">个人主页</a></li>
-                                    <li><a href="{{ url_for('company.jobs') }}">信息管理</a></li>
+                                <li class="{% if active == 'detail' %}active{% endif %}">
+                                    <a href="{{ url_for('company.detail', company_id=current_user.id)}}">企业主页</a>
+                                </li>
+                                <li class="{% if active == 'manage' %}active{% endif %}">
+                                    <a href="{{ url_for('company.resumes') }}">招聘管理</a>
+                                </li>
                             {% endif %}
                             {% if current_user.role == 30 %}
-                                    <li><a href="{{ url_for('admin.index') }}">管理后台</a></li>
+                                <li class="{% if active == 'admin' %}active{% endif %}">
+                                    <a href="{{ url_for('admin.index') }}">管理后台</a>
+                                </li>
                             {% endif %}
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

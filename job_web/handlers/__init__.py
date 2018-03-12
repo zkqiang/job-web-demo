@@ -6,4 +6,3 @@ from .admin import admin
 from .user import user
 from .job import job
 from .company import company
-from .resume import resume

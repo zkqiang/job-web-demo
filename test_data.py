@@ -55,5 +55,5 @@ class FakerData(object):
 
 def run():
     f = FakerData()
-    # f.fake_user()
+    f.fake_user()
     f.fake_job()

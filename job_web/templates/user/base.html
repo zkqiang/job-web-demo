@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+信息管理
+{% endblock %}
+
+{% block body %}
+<div class="row" style="padding-top: 32px">
+  <div class="panel panel-default col-md-3">
+    <h4 class="panel-heading">信息管理</h4>
+    <div class="list-group panel-body">
+      <a href="{{ url_for('user.resume') }}" class="list-group-item {% if panel == 'resume' %}active{% endif %}">我的简历</a>
+      <a href="{{ url_for('user.edit') }}" class="list-group-item {% if panel == 'jobs' %}active{% endif %}">求职记录</a>
+      <a href="{{ url_for('user.edit') }}" class="list-group-item {% if panel == 'edit' %}active{% endif %}">帐号管理</a>
+    </div>
+  </div>
+  <div class="col-md-9">
+    {% block right %}{% endblock %}
+  </div>
+</div>
+{% endblock %}

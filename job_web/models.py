@@ -6,21 +6,11 @@ from flask_login import UserMixin, current_user
 
 db = SQLAlchemy()
 
-job_delivery = db.Table(
-    'job_delivery',
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), primary_key=True),
-    db.Column('job_id', db.Integer, db.ForeignKey('job.id', ondelete='CASCADE'))
-)
-
 FINANCE_STAGE = ['未融资', '天使轮', 'A轮', 'B轮', 'C轮', 'D轮及以上', '上市公司', '不需要融资']
 FIELD = ['移动互联网', '电子商务', '金融', '企业服务', '教育', '文化娱乐', '游戏', 'O2O', '硬件']
 EXP = ['不限', '1年及以下', '1-3年', '3-5年', '5-10年', '10年以上']
 EDUCATION = ['不限学历', '专科', '本科', '硕士', '博士']
 DEFAULT_LOGO = 'https://www.zhipin.com/v2/chat_v2/images/v2/defaultlogov2.jpg'
-
-ROLE_USER = 10
-ROLE_COMPANY = 20
-ROLE_ADMIN = 30
 
 
 class Base(db.Model):
@@ -32,11 +22,15 @@ class Base(db.Model):
                            onupdate=datetime.now)
 
     def __repr__(self):
-        return '<{}: {}'.format(__class__.__name__, self.title)
+        return '<{}: {}>'.format(self.__class__.__name__, self.name)
 
 
 class UserBase(Base, UserMixin):
     __abstract__ = True
+
+    ROLE_USER = 10
+    ROLE_COMPANY = 20
+    ROLE_ADMIN = 30
 
     email = db.Column(db.String(64), unique=True, nullable=False)
     # phone = db.Column(db.Integer, unique=True, index=True, nullable=False)
@@ -52,13 +46,13 @@ class UserBase(Base, UserMixin):
         self._password = generate_password_hash(orig_password)
 
     def is_user(self):
-        return self.role == ROLE_USER
+        return self.role == self.ROLE_USER
 
     def is_company(self):
-        return self.role == ROLE_COMPANY
+        return self.role == self.ROLE_COMPANY
 
     def is_admin(self):
-        return self.role == ROLE_ADMIN
+        return self.role == self.ROLE_ADMIN
 
     def check_password(self, password):
         return check_password_hash(self._password, password)
@@ -68,26 +62,26 @@ class User(UserBase):
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(16), nullable=False)
+    name = db.Column(db.String(8), nullable=False)
     resume = db.Column(db.String(128))
-    role = db.Column(db.SmallInteger, default=ROLE_USER)
+    role = db.Column(db.SmallInteger, default=UserBase.ROLE_USER)
 
 
 class Company(UserBase):
     __tablename__ = 'company'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), unique=True, nullable=False)
+    name = db.Column(db.String(32), unique=True, nullable=False)
     website = db.Column(db.String(64))
     address = db.Column(db.String(128))
     logo = db.Column(db.String(256), default=DEFAULT_LOGO)
-    role = db.Column(db.SmallInteger, default=ROLE_COMPANY)
+    role = db.Column(db.SmallInteger, default=UserBase.ROLE_COMPANY)
     # 融资进度
     finance_stage = db.Column(db.String(16))
     # 公司领域
     field = db.Column(db.String(64))
     # 简介
-    description = db.Column(db.String(256))
+    description = db.Column(db.String(64))
     # 详情
     details = db.Column(db.Text)
 
@@ -125,10 +119,12 @@ class Job(Base):
 
     @property
     def tag_list(self):
-        return self.tags.split(",")
+        if self.tags and '，' in self.tags:
+            return self.tags.split('，')
+        return self.tags.split(',')
 
-    def current_user_is_applied(self):
-        delivery = Delivery.query.filter_by(job_id=self.id, user_id=current_user.id).first()
+    def is_applied(self):
+        delivery = current_user.delivery.filter_by(job_id=self.id).first()
         return delivery is not None
 
 
@@ -149,10 +145,8 @@ class Delivery(Base):
     status = db.Column(db.SmallInteger, default=STATUS_WAITTING, index=True)
     company_response = db.Column(db.String(256))
 
-    # @property
-    # def user(self):
-    #     return User.query.get(self.user_id)
-    #
-    # @property
-    # def job(self):
-    #     return Job.query.get(self.job_id)
+    def accept(self):
+        self.status = self.STATUS_ACCEPT
+
+    def reject(self):
+        self.status = self.STATUS_REJECT

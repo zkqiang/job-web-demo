@@ -6,9 +6,10 @@ from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_login import LoginManager
 from flask_share import Share
-from flask_uploads import UploadSet, configure_uploads, patch_request_class
+from flask_uploads import UploadSet, configure_uploads, patch_request_class, IMAGES
 
-uploaded_pdf = UploadSet('pdf', ('pdf', ))
+uploaded_pdf = UploadSet('PDF', IMAGES)
+uploaded_logo = UploadSet('PDF', IMAGES)
 
 
 def register_extensions(app):
@@ -21,7 +22,9 @@ def register_extensions(app):
     login_manager = LoginManager()
     login_manager.init_app(app)
     configure_uploads(app, uploaded_pdf)
+    configure_uploads(app, uploaded_logo)
     patch_request_class(app, app.config['UPLOADED_PDF_SIZE'])
+    patch_request_class(app, app.config['UPLOADED_LOGO_SIZE'])
     login_manager = LoginManager()
     login_manager.init_app(app)
 
@@ -32,16 +35,14 @@ def register_extensions(app):
         elif Company.query.get(id):
             return Company.query.get(id)
     login_manager.login_view = 'front.login'
-    login_manager.login_message = '该页面需要登录后访问'
 
 
 def register_blueprints(app):
-    from .handlers import front, admin, user, company, resume, job
+    from .handlers import front, admin, user, company, job
     app.register_blueprint(front)
     app.register_blueprint(user)
     app.register_blueprint(admin)
     app.register_blueprint(company)
-    app.register_blueprint(resume)
     app.register_blueprint(job)
 
 

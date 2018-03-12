@@ -16,6 +16,9 @@ hr { margin: 8px }
     font-size: 12px;
 }
 
+td {text-align:center;}
+th {text-align:center;}
+
 .con_ul_li {
     display: block;
     float: left;

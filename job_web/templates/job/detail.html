@@ -18,10 +18,10 @@
     </div>
     {% if current_user.role == 10 %}
       <div class="col-md-4">
-        {% if current_user.is_authenticated and job.current_user_is_applied %}
-          <a class="btn btn-success btn-lg dilivery-btn disabled">已投递</a>
+        {% if current_user.is_authenticated and job.is_applied() %}
+          <a class="btn btn-success btn-lg dilivery-btn disabled navbar-btn" style="margin-top: 32px">已投递</a>
         {% else %}
-          <a href="{{ url_for('job.send', job_id=job.id) }}" class="btn btn-success btn-lg navbar-btn">投递简历</a>
+          <a href="{{ url_for('job.apply', job_id=job.id) }}" class="btn btn-success btn-lg navbar-btn" style="margin-top: 32px">投递简历</a>
         {% endif %}
       </div>
     {% endif %}

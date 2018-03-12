@@ -1,42 +1,43 @@
-{% extends "company/company_base.html" %}
+{% extends "company/base.html" %}
 
 {% block title %}
 简历管理
 {% endblock %}
 
-{% block operation %}
-<a href="{{ url_for('company.company_job_apply', company_id=company_id, status='waiting') }}" type="button" class="btn btn-success btn-admin">未处理</a>
-<a href="{{ url_for('company.company_job_apply', company_id=company_id, status='accept') }}" type="button" class="btn btn-success btn-admin">面试</a>
-<a href="{{ url_for('company.company_job_apply', company_id=company_id, status='reject') }}" type="button" class="btn btn-success btn-admin">不合适</a>
-{% endblock %}
-
-{% block admin %}
+{% block right %}
+<ul class="nav nav-tabs">
+  <li role="presentation" class="{% if status == '1' %}active{% endif %}"><a href="{{ url_for('company.resumes', status=1) }}">未处理</a></li>
+  <li role="presentation" class="{% if status == '3' %}active{% endif %}"><a href="{{ url_for('company.resumes', status=3) }}">面试</a></li>
+  <li role="presentation" class="{% if status == '2' %}active{% endif %}"><a href="{{ url_for('company.resumes', status=2) }}">不合适</a></li>
+</ul>
 <table class="table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>职位名称</th>
-      <th>求职者姓名</th>
-      <th>简历</th>
+      <th>职位</th>
+      <th>姓名</th>
       <th>投递时间</th>
       <th>操作</th>
     </tr>
     <tbody>
       {%for delivery in pagination.items %}
       <tr>
-        <td>{{ delivery.id }}</td>
         <td>{{ delivery.job.name }}</td>
-        <td>{{ delivery.user.username }}</td>
-        <td><a href="{{ delivery.user.resume_url }}" type="button" class="btn btn-default btn-sm" target="_blank">查看</a></td>
+        <td>{{ delivery.user.name }}</td>
         <td>{{ delivery.created_at }}</td>
         <td>
             <div class="btn-group" role="group">
-              <a href="{{ url_for('company.company_job_apply_accept', company_id=company_id, delivery_id=delivery.id) }}" type="button" class="btn btn-default" title="面试">
-                  面试
+              <a href="{{ delivery.user.resume }}" type="button" class="btn btn-default" title="简历">
+                  简历
               </a>
-              <a href="{{ url_for('company.company_job_apply_reject', company_id=company_id, delivery_id=delivery.id) }}" type="button" class="btn btn-default" title="拒绝">
-                  拒绝
-              </a>
+              <li type="button" class="btn btn-default dropdown-toggle"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  处理
+              </li>
+              <ul class="dropdown-menu">
+                <li><a href="{{ url_for('company.resume_accept', delivery_id=delivery.id) }}">面试</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{{ url_for('company.resume_reject', delivery_id=delivery.id) }}">不合适</a></li>
+              </ul>
             </div>
         </td>
       </tr>
