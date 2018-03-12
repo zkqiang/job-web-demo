@@ -6,5 +6,5 @@
 {% endblock %}
 
 {% block right %}
-{{ render_form('企业信息', form, url_for('company.edit')) }}
+{{ render_form('企业信息', form, url_for('company.edit'), file_url=file_url, upload=True, img_sm=True) }}
 {% endblock %}

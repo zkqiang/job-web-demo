@@ -38,16 +38,17 @@ def apply(job_id):
     job_obj = Job.query.get_or_404(job_id)
     if not current_user.is_user():
         abort(404)
-    # if current_user.resume is None:
-    #     flash('请先上传简历', 'warning')
-    #     return redirect(url_for('user.edit'))
+    if current_user.resume is None:
+        flash('请先上传简历', 'warning')
+        return redirect(url_for('user.resume'))
     elif job_obj.is_applied():
         flash('已经投递过该职位', 'warning')
         return redirect(url_for('job.detail', job_id=job_id))
     delivery = Delivery(
         job_id=job_id,
         user_id=current_user.id,
-        company_id=job_obj.company.id
+        company_id=job_obj.company.id,
+        resume=current_user.resume
     )
     db.session.add(delivery)
     db.session.commit()

@@ -46,10 +46,12 @@ def detail(company_id):
 @company_required
 def edit():
     form = CompanyDetailForm(obj=current_user)
+    logo_url = current_user.logo
     if form.validate_on_submit():
-        form.update_detail(current_user)
+        logo_url = form.update_detail(current_user)
+        print(logo_url)
         flash('企业信息更新成功', 'success')
-    return render_template('company/edit.html', form=form, panel='edit', active='manage')
+    return render_template('company/edit.html', form=form, file_url=logo_url, panel='edit', active='manage')
 
 
 @company.route('/jobs')
@@ -76,7 +78,7 @@ def resumes():
 @company_required
 def resume_accept():
     delivery_id = request.args.get('delivery_id')
-    delivery = current_user.delivery.filter_by(delivery_id=delivery_id).first()
+    delivery = current_user.delivery.filter_by(id=delivery_id).first_or_404()
     delivery.accept()
     db.session.add(delivery)
     db.session.commit()
@@ -88,9 +90,15 @@ def resume_accept():
 @company_required
 def resume_reject():
     delivery_id = request.args.get('delivery_id')
-    delivery = current_user.delivery.filter_by(delivery_id=delivery_id).first()
+    delivery = current_user.delivery.filter_by(id=delivery_id).first_or_404()
     delivery.reject()
     db.session.add(delivery)
     db.session.commit()
     flash('已列入不合适', 'warning')
     return redirect(url_for('company.resumes'))
+
+
+@company.errorhandler(413)
+def page_not_found(error):
+    flash('图片大小超过限制', 'warning')
+    return redirect(request.path)

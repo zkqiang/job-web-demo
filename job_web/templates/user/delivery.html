@@ -1,10 +1,42 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "user/base.html" %}
 
-</body>
-</html>
+{% block title %}
+求职记录
+{% endblock %}
+
+{% block right %}
+<ul class="nav nav-tabs">
+  <li role="presentation" class="{% if not status %}active{% endif %}"><a href="{{ url_for('user.delivery') }}">所有</a></li>
+  <li role="presentation" class="{% if status == '1' %}active{% endif %}"><a href="{{ url_for('user.delivery', status=1) }}">未回应</a></li>
+  <li role="presentation" class="{% if status == '3' %}active{% endif %}"><a href="{{ url_for('user.delivery', status=3) }}">有意向</a></li>
+  <li role="presentation" class="{% if status == '2' %}active{% endif %}"><a href="{{ url_for('user.delivery', status=2) }}">不合适</a></li>
+</ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th>职位</th>
+      <th>企业</th>
+      <th>投递时间</th>
+      <th>状态</th>
+    </tr>
+    <tbody>
+      {%for delivery in pagination.items %}
+      <tr>
+        <td><a href="{{ url_for('job.detail', job_id=delivery.job.id) }}">{{ delivery.job.name }}</a></td>
+        <td><a href="{{ url_for('company.detail', company_id=delivery.company_id) }}">{{ delivery.company.name }}</a></td>
+        <td>{{ delivery.created_at }}</td>
+        <td>
+            {% if delivery.status == 1 %}
+            <span class="label label-info">未回应</span>
+            {% elif delivery.status == 2 %}
+            <span class="label label-success">有意向</span>
+            {% elif delivery.status == 3 %}
+            <span class="label label-default">不合适</span>
+            {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </thead>
+</table>
+{% endblock %}

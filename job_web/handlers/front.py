@@ -18,7 +18,6 @@ def index():
 
 @front.route('/login', methods=['GET', 'POST'])
 def login():
-    # FIXME 登录有BUG，重构User类
     if current_user.is_authenticated:
         return redirect(url_for('front.index'))
     form = LoginForm()
@@ -35,7 +34,6 @@ def login():
         if not user_data.is_enable:
             flash('该用户不可用，请联系网站管理员', 'danger')
             return redirect(url_for('front.login'))
-        print(user_data)
         login_user(user_data)
         flash('登录成功', 'success')
         next_page = request.args.get('next')

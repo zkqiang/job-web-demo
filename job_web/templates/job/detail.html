@@ -14,17 +14,21 @@
           </span>&nbsp;&nbsp;{{ job.exp }}经验 / {{ job.education }}
           <!--{{ share.create(title='分享：', sites='weibo', mobile_sites='weibo') }}-->
       </p>
-          <span class="timesince">{{ moment(job.updated_at).fromNow(refresh=True) }}发布</span>
+          <span class="timesince">{{ moment(job.updated_at, local=true).fromNow(refresh=True) }}发布</span>
     </div>
-    {% if current_user.role == 10 %}
-      <div class="col-md-4">
-        {% if current_user.is_authenticated and job.is_applied() %}
-          <a class="btn btn-success btn-lg dilivery-btn disabled navbar-btn" style="margin-top: 32px">已投递</a>
-        {% else %}
-          <a href="{{ url_for('job.apply', job_id=job.id) }}" class="btn btn-success btn-lg navbar-btn" style="margin-top: 32px">投递简历</a>
-        {% endif %}
-      </div>
+    <div class="col-md-4">
+    {% if job.is_enable %}
+      {% if current_user.role == 10 %}
+          {% if current_user.is_authenticated and job.is_applied() %}
+            <a class="btn btn-default btn-lg dilivery-btn disabled navbar-btn" style="margin-top: 32px">已投递</a>
+          {% else %}
+            <a href="{{ url_for('job.apply', job_id=job.id) }}" class="btn btn-success btn-lg navbar-btn" style="margin-top: 32px">投递简历</a>
+          {% endif %}
+      {% endif %}
+    {% else %}
+      <a class="btn btn-success btn-lg dilivery-btn disabled navbar-btn" style="margin-top: 32px">职位已下线</a>
     {% endif %}
+    </div>
   </div>
 </div>
 {% endblock %}
@@ -33,7 +37,7 @@
 <div class="col-md-8">
   <div class="job-detail">
     <h4>职位诱惑</h4><br>
-    <p>{{ job.treatment }}</p>
+    <p>{{ job.treatment | safe }}</p>
     <br>
     <h4>职位描述</h4><br>
     <p>{{ job.description | safe }}</p>
@@ -41,16 +45,12 @@
     <p>{{ job.company.address }}</p>
   </div>
 </div>
-<div class="col-md-4">
-  <div class="media">
-  <div class="media-left">
+<div class="col-md-3">
+  <div class="thumbnail">
     <a href="{{ url_for('company.detail', company_id=job.company.id) }}">
-      <img src="{{ job.company.logo }}" class="media-object" height="128" width="128">
+      <img src="{{ job.company.logo }}" class="big-logo-img" >
     </a>
   </div>
-  <div class="media-body">
-  </div>
-</div>
 
   <h4>{{ job.company.name }}</h4>
   <p>领域：{{ job.company.field }}</p>

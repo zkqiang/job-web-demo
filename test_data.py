@@ -5,6 +5,7 @@ from faker import Faker
 from job_web.models import db, User, Company, Job
 import random
 from job_web.forms import EXP, EDUCATION, FINANCE_STAGE, FIELD
+import time
 
 fake = Faker('zh_CN')
 fake_en = Faker()
@@ -15,6 +16,7 @@ class FakerData(object):
     def fake_user(self):
         for _ in range(30):
             c = User()
+            c.id = int(time.time() * 100000000)
             c.name = fake.word()
             c.email = fake_en.email()
             # c.phone = random.randint(13900000000, 13999999999)

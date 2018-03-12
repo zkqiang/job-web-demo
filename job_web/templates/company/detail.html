@@ -10,13 +10,15 @@
   <div class="container">
     <div class="col-md-3">
       <div class="thumbnail">
-        <img src="{{ company.logo }}" >
+        <img src="{{ company.logo }}" class="big-logo-img">
       </div>
     </div>
     <div class="col-md-9">
       <h2>{{ company.name }}</h2>
       <p>{{ company.description }}</p>
-      <a href="{{ company.address }}">{{ company.address }}</a>
+      {% if company.address %}
+      <a>{{ company.address }}</a>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -34,7 +36,7 @@
   </ul>
     {% if panel == 'about' %}
       <div class="company-detail">
-        {{ company.detail }}
+        {{ company.details | safe }}
       </div>
     {% else %}
       <ul class="company-detail list-group">
@@ -54,9 +56,11 @@
       {% endif %}
 </div>
 <div class="col-md-4">
-  <h4>公司基本信息</h4>
-  <p>领域：{{ company.field }}</p>
-  <p>融资：{{ company.finance_stage }}</p>
-  <p>城市：{{ company.location }}</p>
+    <h4>公司基本信息</h4>
+    <p>领域：{{ company.field }}</p>
+    <p>融资：{{ company.finance_stage }}</p>
+    {% if company.website %}
+      <p>网站：<a href="{{ company.website }}">{{ company.website }}</a></p>
+    {% endif %}
 </div>
 {% endblock %}

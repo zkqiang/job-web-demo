@@ -16,7 +16,7 @@
     <tbody>
       {%for job in pagination.items %}
       <tr>
-        <td>{{ job.name }}</td>
+        <td><a href="{{ url_for('job.detail', job_id=job.id) }}">{{ job.name }}</a></td>
         <td>{{ job.created_at }}</td>
         <td>{{ job.updated_at }}</td>
         <td>

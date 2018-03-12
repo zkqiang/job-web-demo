@@ -8,8 +8,8 @@ from flask_login import LoginManager
 from flask_share import Share
 from flask_uploads import UploadSet, configure_uploads, patch_request_class, IMAGES
 
-uploaded_pdf = UploadSet('PDF', IMAGES)
-uploaded_logo = UploadSet('PDF', IMAGES)
+uploaded_resume = UploadSet('resume', IMAGES)
+uploaded_logo = UploadSet('logo', IMAGES)
 
 
 def register_extensions(app):
@@ -21,10 +21,9 @@ def register_extensions(app):
     share.init_app(app)
     login_manager = LoginManager()
     login_manager.init_app(app)
-    configure_uploads(app, uploaded_pdf)
+    configure_uploads(app, uploaded_resume)
     configure_uploads(app, uploaded_logo)
-    patch_request_class(app, app.config['UPLOADED_PDF_SIZE'])
-    patch_request_class(app, app.config['UPLOADED_LOGO_SIZE'])
+    patch_request_class(app, app.config['UPLOADED_SIZE'])
     login_manager = LoginManager()
     login_manager.init_app(app)
 

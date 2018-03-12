@@ -6,8 +6,6 @@
 {% endblock %}
 
 {% block right %}
-{{ render_form('我的简历', form, url_for('user.resume'), upload=True) }}
-{% if file_url %}
-    <br><img src="{{ file_url }}">
-{% endif %}
+<h1>我的简历</h1>
+{{ render_form('', form, url_for('user.resume'), file_url=file_url, upload=True) }}
 {% endblock %}

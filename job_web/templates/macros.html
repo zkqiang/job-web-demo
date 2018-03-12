@@ -1,4 +1,4 @@
-{% macro render_form(title, form, url, upload=False, col_md=True) %}
+{% macro render_form(title, form, url, file_url, upload=False, col_md=True, img_sm=False) %}
 <div class="{% if col_md %} col_md-form {% else %} form {% endif %}">
     <h1>{{ title }}</h1>
     <form method="POST" enctype="{% if upload %}multipart/form-data{% endif %}" action="{{ url }}">
@@ -14,13 +14,24 @@
                 </div>
             {% elif field.type == "FileField" %}
                 <label>{{ field.label }}</label>
-                {{ field() }}
+                    {% if file_url %}
+                        {% if img_sm %}
+                        <br><img src="{{ file_url }}" class="logo-img">
+                        {% else %}
+                        <br><img src="{{ file_url }}">
+                        {% endif %}
+                    {% endif %}
+                <div style="margin-bottom: 16px">{{ field() }}</div>
                 {% for error in field.errors %}
-                    <span class="help-block">{{ error }}</span>
+                    <span class="help-block" style="color: #fd5f39">{{ error }}</span>
                 {% endfor %}
             {% else %}
                 <div class="form-group {% if field.errors %}has-error{% endif %}">
-                    {{ field.label }} {{ field(class="form-control") }}
+                    {{ field.label }}
+                    {% if field.flags.required %}
+                        <span style="color: #fd5f39"> *</span>
+                    {% endif %}
+                    {{ field(class="form-control") }}
                     {% if field.errors %}
                         {% for error in field.errors %}
                             <div class="help-block">{{ error }}</div>
@@ -63,12 +74,12 @@
 <div class="col-sm-6 col-md-3 company-item">
   <div class="thumbnail">
       <a href="{{ url_for('company.detail', company_id=company.id) }}">
-        <img src="{{ company.logo }}" width="100" height="100" alt="{{ company.name }}">
+          <img src="{{ company.logo }}" alt="{{ company.name }}" class="logo-img">
       </a>
-      <h4><a href="{{ url_for('company.detail', company_id=company.id) }}">{{ company.name }}</a></h4>
+      <h4><a href="{{ url_for('company.detail', company_id=company.id) }}">{{ company.name  | truncate(8, True)}}</a></h4>
       <p>{{ company.field }} / {{ company.finance_stage }}</p>
   <hr>
-  <a href="{{ url_for('company.jobs', company_id=company.id) }}">
+  <a href="{{ url_for('company.detail', company_id=company.id, job='job') }}">
       <p style="padding-bottom: 10px">
          {{ company.enabled_jobs().count() }}<br/>在招职位
       </p>
@@ -83,10 +94,10 @@
   <div class="job-box">
       <div class="caption">
         <a href="{{ url_for('job.detail', job_id=job.id) }}">
-        <b>{{ job.name }}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>{{ job.name | truncate(10, True)}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </a>
         <span class="salary">{{ job.salary_min }}k-{{ job.salary_max }}k</span><br/>
-        <span>{{ job.exp }}经验 / {{ job.education }}</span><br/>
+        <span>{{ job.city }} / {{ job.exp }}经验 / {{ job.education }}</span><br/>
         {% for tag in job.tag_list %}
         <span class="label label-primary">{{ tag }}</span>
         {% endfor %}
@@ -96,14 +107,14 @@
       <div class="media">
         <div class="media-left">
           <a href="{{ url_for('company.detail', company_id=job.company.id) }}">
-            <img class="media-object" src="{{ job.company.logo }}" width="40" height="40" alt="job.company.name">
+            <img class="media-object" src="{{ job.company.logo }}" width="60" height="60" alt="job.company.name">
           </a>
         </div>
         <div class="media-body">
           <a href="{{ url_for('company.detail', company_id=job.company.id) }}">
-          <h4 class="media-heading">{{ job.company.name }}</h4>
+          <h4 class="media-heading">{{ job.company.name  | truncate(16, True) }}</h4>
           </a>
-          <span class="company-meta">{{ job.company.field }} / {{ job.company.finance_stage }} / {{ job.city }}</span>
+          <span class="company-meta">{{ job.company.field }} / {{ job.company.finance_stage }}</span>
           </div>
         </div>
     </div>
