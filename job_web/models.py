@@ -9,7 +9,7 @@ db = SQLAlchemy()
 
 FINANCE_STAGE = ['未融资', '天使轮', 'A轮', 'B轮', 'C轮', 'D轮及以上', '上市公司', '不需要融资']
 FIELD = ['移动互联网', '电子商务', '金融', '企业服务', '教育', '文化娱乐', '游戏', 'O2O', '硬件']
-EXP = ['不限', '1年及以下', '1-3年', '3-5年', '5-10年', '10年以上']
+EXP = ['不限', '1年', '1-3年', '3-5年', '5-10年', '10年以上']
 EDUCATION = ['不限学历', '专科', '本科', '硕士', '博士']
 DEFAULT_LOGO = 'https://www.zhipin.com/v2/chat_v2/images/v2/defaultlogov2.jpg'
 
@@ -80,7 +80,7 @@ class Company(UserBase):
     # 融资进度
     finance_stage = db.Column(db.String(16))
     # 公司领域
-    field = db.Column(db.String(64))
+    field = db.Column(db.String(16))
     # 简介
     description = db.Column(db.String(64))
     # 详情
@@ -104,9 +104,9 @@ class Job(Base):
     # 职位待遇
     treatment = db.Column(db.Text)
     # 经验要求
-    exp = db.Column(db.String(16), index=True)
+    exp = db.Column(db.String(16), default=EXP[0], index=True)
     # 学历要求
-    education = db.Column(db.String(16), index=True)
+    education = db.Column(db.String(16), default=EDUCATION[0], index=True)
     # 工作城市
     city = db.Column(db.String(8), index=True)
     # 职位标签
@@ -143,7 +143,7 @@ class Delivery(Base):
     user = db.relationship('User', uselist=False, backref=db.backref('delivery', lazy='dynamic'))
     company_id = db.Column(db.Integer, db.ForeignKey('company.id', ondelete='SET NULL'))
     company = db.relationship('Company', uselist=False, backref=db.backref('delivery', lazy='dynamic'))
-    # resume = db.Column(db.String(128))
+    resume = db.Column(db.String(128))
     status = db.Column(db.SmallInteger, default=STATUS_WAITTING, index=True)
     company_response = db.Column(db.String(256))
 

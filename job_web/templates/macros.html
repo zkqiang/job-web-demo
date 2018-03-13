@@ -74,7 +74,7 @@
 <div class="col-sm-6 col-md-3 company-item">
   <div class="thumbnail">
       <a href="{{ url_for('company.detail', company_id=company.id) }}">
-          <img src="{{ company.logo }}" alt="{{ company.name }}" class="logo-img">
+          <img class="img-rounded logo-img" src="{{ company.logo }}" alt="{{ company.name }}">
       </a>
       <h4><a href="{{ url_for('company.detail', company_id=company.id) }}">{{ company.name  | truncate(8, True)}}</a></h4>
       <p>{{ company.field }} / {{ company.finance_stage }}</p>
@@ -95,12 +95,14 @@
       <div class="caption">
         <a href="{{ url_for('job.detail', job_id=job.id) }}">
         <b>{{ job.name | truncate(10, True)}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </a>
-        <span class="salary">{{ job.salary_min }}k-{{ job.salary_max }}k</span><br/>
-        <span>{{ job.city }} / {{ job.exp }}经验 / {{ job.education }}</span><br/>
-        {% for tag in job.tag_list %}
-        <span class="label label-primary">{{ tag }}</span>
-        {% endfor %}
+        </a><br/>
+        <span style="">{{ job.city }} / {{ job.exp }}经验 / {{ job.education }}</span>
+          <span class="salary" style="font-size: 16px; float: right; margin-right: 12px">{{ job.salary_min }}k-{{ job.salary_max }}k</span><br/>
+          {% if job.tag_list %}
+            {% for tag in job.tag_list[:2] %}
+              <span class="index-label"><small>{{ tag }}</small></span>
+            {% endfor %}
+          {% endif %}
         <span>&nbsp;</span>
       </div>
       <hr>

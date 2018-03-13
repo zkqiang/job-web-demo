@@ -1,4 +1,5 @@
 {% extends "company/base.html" %}
+{% from "macros.html" import render_pagination %}
 
 {% block title %}
 职位管理
@@ -41,6 +42,6 @@
       </tr>
       {% endfor %}
     </tbody>
-  </thead>
 </table>
+{{ render_pagination(pagination, 'company.jobs') }}
 {% endblock %}

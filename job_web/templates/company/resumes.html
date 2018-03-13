@@ -26,7 +26,7 @@
         <td>{{ delivery.created_at }}</td>
         <td>
             <div class="btn-group" role="group">
-              <a href="{{ delivery.user.resume }}" type="button" class="btn btn-default" title="简历">
+              <a href="{{ delivery.resume }}" type="button" class="btn btn-default" title="简历">
                   简历
               </a>
               <li type="button" class="btn btn-default dropdown-toggle"
@@ -43,6 +43,5 @@
       </tr>
       {% endfor %}
     </tbody>
-  </thead>
 </table>
 {% endblock %}

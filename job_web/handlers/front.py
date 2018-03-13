@@ -11,8 +11,15 @@ front = Blueprint('front', __name__)
 
 @front.route('/')
 def index():
-    jobs = Job.query.filter(Job.is_enable.is_(True)).order_by(Job.updated_at.desc()).limit(9)
-    companies = Company.query.filter(Company.is_enable.is_(True)).order_by(Company.updated_at).limit(8)
+    company_all = Company.query.filter(Company.is_enable.is_(True)).order_by(Company.updated_at.desc())
+    companies = []
+    for c in company_all:
+        if c and c.enabled_jobs().count() != 0:
+            companies.append(c)
+            if len(companies) == 8:
+                break
+
+    jobs = Job.query.group_by(Job.company_id).order_by(Job.updated_at.desc()).limit(12)
     return render_template('index.html', active='index', jobs=jobs, companies=companies)
 
 

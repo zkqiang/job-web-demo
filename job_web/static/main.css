@@ -5,11 +5,12 @@ span {
 
 body { padding-top: 52px; }
 
-h4 { padding-top: 10px;
-    padding-bottom: 10px;
+h4 { padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-hr { margin: 8px }
+hr { margin-top: 12px;
+margin-bottom: 6px;}
 
 td {text-align:center;}
 th {text-align:center;}
@@ -22,17 +23,35 @@ th {text-align:center;}
 .logo-img {
     min-width: 40px;
     max-width: 300px;
-    min-height: 100px;
-    max-height: 100px;
+    min-height: 90px;
+    max-height: 90px;
 }
 
 .big-logo-img {
     max-height: 140px;
 }
 
+.heading { padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .item_con_ul {
     color: #777;
     font-size: 12px;
+}
+
+.index-label {
+    float: left;
+    height: 22px;
+    margin-top: 2px;
+    margin-right: 8px;
+    padding: 0 10px;
+    line-height: 22px;
+    background-color: #fff;
+    color: #70797b;
+    font-size: 12px;
+    border-radius: 10px;
+    border: 1px solid #ededed;
 }
 
 .con_ul_li {

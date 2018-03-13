@@ -51,7 +51,7 @@ class RegisterCompanyForm(FlaskForm):
     repeat_password = PasswordField('重复密码', validators=[DataRequired(message='请填写密码'),
                                                         EqualTo('password', message='两次密码不一致')])
     name = StringField('企业名称', validators=[DataRequired(message='请填写内容'),
-                                           Length(4, 32, message='须在4～32个字符之间')])
+                                           Length(2, 32, message='须在2～32个字符之间')])
     finance_stage = SelectField('融资阶段', choices=[(i, i) for i in FINANCE_STAGE])
     field = SelectField('行业领域', choices=[(i, i) for i in FIELD])
     description = StringField('公司简介', validators=[Length(0, 50, message='最多50个字符')])

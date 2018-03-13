@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint, render_template, \
-    redirect, url_for, flash, request, current_app
+    redirect, url_for, flash, request, current_app, abort
 from flask_login import current_user
 from ..decorators import company_required
 from ..forms import RegisterCompanyForm, CompanyDetailForm
@@ -26,7 +26,7 @@ def register():
 @company.route('/')
 def index():
     page = request.args.get('page', default=1, type=int)
-    pagination = Company.query.order_by(Company.updated_at.desc()).paginate(
+    pagination = Company.query.filter(Company.is_enable.is_(True)).order_by(Company.updated_at.desc()).paginate(
         page=page, per_page=current_app.config['COMPANY_INDEX_PER_PAGE'], error_out=False)
     return render_template('company/index.html', pagination=pagination, active='company')
 
@@ -34,10 +34,12 @@ def index():
 @company.route('/<int:company_id>')
 def detail(company_id):
     company_obj = Company.query.get_or_404(company_id)
+    if not company_obj.is_enable:
+        abort(404)
     if request.args.get('job'):
         page = request.args.get('page', default=1, type=int)
-        pagination = company_obj.jobs.order_by(Job.updated_at.desc()).paginate(
-            page=page, per_page=current_app.config['LIST_PER_PAGE'], error_out=False)
+        pagination = company_obj.enabled_jobs().order_by(Job.updated_at.desc()).paginate(
+            page=page, per_page=current_app.config['COMPANY_DETAIL_PER_PAGE'], error_out=False)
         return render_template('company/detail.html', pagination=pagination, panel='jobs', company=company_obj)
     return render_template('company/detail.html', company=company_obj, panel='about', active='detail')
 

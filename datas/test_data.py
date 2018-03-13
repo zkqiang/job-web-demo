@@ -51,6 +51,7 @@ class FakerData(object):
             job.city = random.choice(('北京', '上海', '广州'))
             job.description = fake.word()
             job.treatment = fake.word()
+            job.tags = '%s,%s,%s,%s' % (fake.word(), fake.word(), fake.word(), fake.word())
             db.session.add(job)
             db.session.commit()
 

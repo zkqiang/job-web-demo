@@ -7,7 +7,7 @@
 {% block body %}
 <div class="row" style="padding-top: 32px">
   <div class="panel panel-default col-md-3">
-    <h4 class="panel-heading">招聘管理</h4>
+    <h4 class="panel-heading heading">招聘管理</h4>
     <div class="list-group panel-body">
       <a href="{{ url_for('company.resumes') }}" class="list-group-item {% if panel == 'resumes' %}active{% endif %}">投递管理</a>
       <a href="{{ url_for('company.jobs') }}" class="list-group-item {% if panel == 'jobs' %}active{% endif %}">职位管理</a>

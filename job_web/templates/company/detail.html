@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% from "macros.html" import render_pagination %}
 
 {% block title %}
 {{ company.name }}
@@ -15,9 +14,9 @@
     </div>
     <div class="col-md-9">
       <h2>{{ company.name }}</h2>
-      <p>{{ company.description }}</p>
+      <p style="font-size: 16px">{{ company.description }}</p>
       {% if company.address %}
-      <a>{{ company.address }}</a>
+      <p style="font-size: 16px">所在城市：{{ company.address }}</p>
       {% endif %}
     </div>
   </div>
@@ -40,7 +39,7 @@
       </div>
     {% else %}
       <ul class="company-detail list-group">
-        {% for job in company.enabled_jobs() %}
+        {% for job in pagination.items %}
           <li class="job-item list-group-item">
             <a href="{{ url_for('job.detail', job_id=job.id) }}">
             <div class="item-title">{{ job.name }}</div>
@@ -52,7 +51,27 @@
           </li>
         {% endfor %}
       </ul>
-      {{ render_pagination(pagination, 'company.index') }}
+      {% if pagination.pages > 1 %}
+        <nav class="nav-pagination" aria-label="Page navigation">
+          <ul class="pagination">
+            {% if pagination.has_prev %}
+                <li><a href="{{url_for('company.detail', page=pagination.prev_num, company_id=company.id, job='job' ) }}">&laquo;</a></li>
+            {% endif %}
+              {% for page in pagination.iter_pages() %}
+                {% if page %}
+                  {% if page != pagination.page %}
+                  <li><a href="{{ url_for('company.detail', page=page, company_id=company.id, job='job') }}">{{ page }}</a></li>
+                  {% else %}
+                  <li class="active"><a class="disabled">{{page}} <span class="sr-only">(current)</span></a></li>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% if pagination.has_next %}
+                <li><a href="{{url_for('company.detail', page=pagination.next_num, company_id=company.id, job='job') }}">&raquo;</a>  </li>
+            {% endif %}
+          </ul>
+        </nav>
+        {% endif %}
       {% endif %}
 </div>
 <div class="col-md-4">
