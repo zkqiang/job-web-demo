@@ -3,6 +3,7 @@ from flask import url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, current_user
+from sqlalchemy import event, DDL
 
 db = SQLAlchemy()
 
@@ -66,6 +67,9 @@ class User(UserBase):
     name = db.Column(db.String(8), nullable=False)
     resume = db.Column(db.String(128))
     role = db.Column(db.SmallInteger, default=UserBase.ROLE_USER)
+
+
+event.listen(User.__table__, "after_create", DDL("ALTER TABLE user AUTO_INCREMENT = 100000000"))
 
 
 class Company(UserBase):
