@@ -101,21 +101,7 @@ class LaGouSpider(BaseSpider, metaclass=SpiderMeta):
         """
         page = 1
         while True:
-            url = 'https://www.lagou.com/gongsi/0-0-0.json'
-            # 请求携带的参数
-            params = {'first': 'false', 'pn': page, 'sortField': 0, 'havemark': 0}
-            # 提示请求频繁则重试2次
-            for _ in range(2):
-                resp = self.request('post', url, data=params)
-                if '频繁' not in resp.text:
-                    break
-                time.sleep(10)
-            else:
-                self.logger.error(__class__.__name__, '请求出错')
-                break
-            # 解析详情页的编号，进一步分析详情页
-            resp_text = json.loads(resp.text)
-            companies = resp_text['result']
+            companies = self._parse_company_json(page)
             if not companies:
                 break
             for c in companies:
@@ -137,12 +123,7 @@ class LaGouSpider(BaseSpider, metaclass=SpiderMeta):
                 counter = 0
                 total = random.randint(5, 30)
                 while counter < total:
-                    job_url = 'https://www.lagou.com/gongsi/searchPosition.json'
-                    job_params = {'companyId': c['companyId'], 'pageNo': job_page,
-                                  'positionFirstType': '全部', 'pageSize': 10, 'schoolJob': 'false'}
-                    job_resp = self.request('post', job_url, data=job_params)
-                    job_resp_text = json.loads(job_resp.text)
-                    jobs = job_resp_text['content']['data']['page']['result']
+                    jobs = self._parse_job_json(c['companyId'], job_page)
                     if not jobs:
                         break
                     for j in jobs:
@@ -167,9 +148,25 @@ class LaGouSpider(BaseSpider, metaclass=SpiderMeta):
                     job_page += 1
             page += 1
 
+    def _parse_company_json(self, page):
+        url = 'https://www.lagou.com/gongsi/0-0-0.json'
+        params = {'first': 'false', 'pn': page, 'sortField': 0, 'havemark': 0}
+        resp = self._request('post', url, data=params)
+        # 解析详情页的编号，进一步分析详情页
+        resp_text = json.loads(resp.text)
+        return resp_text['result']
+
+    def _parse_job_json(self, company_id, page):
+        job_url = 'https://www.lagou.com/gongsi/searchPosition.json'
+        job_params = {'companyId': company_id, 'pageNo': page,
+                      'positionFirstType': '全部', 'pageSize': 10, 'schoolJob': 'false'}
+        job_resp = self._request('post', job_url, data=job_params)
+        job_resp_text = json.loads(job_resp.text)
+        return job_resp_text['content']['data']['page']['result']
+
     def _parse_company_detail(self, detail_url):
         """解析详情页，并将数据以字典形式返回"""
-        resp = self.request('get', detail_url)
+        resp = self._request('get', detail_url)
         html = etree.HTML(resp.text.replace('\u2028', '').encode('utf-8'))
         name = html.xpath('//div[@class="company_main"]/h1/a/text()')
         # 这里最好先判断一下，以免没提取到出现异常
@@ -186,7 +183,7 @@ class LaGouSpider(BaseSpider, metaclass=SpiderMeta):
         return supply
 
     def _parse_job_detail(self, url):
-        resp = self.request('get', url)
+        resp = self._request('get', url)
         html = etree.HTML(resp.text.replace('\u2028', '').encode('utf-8'))
         title = html.xpath('//span[@class="name"]/text()')
         if not title:
@@ -198,6 +195,15 @@ class LaGouSpider(BaseSpider, metaclass=SpiderMeta):
                 '<span class="company_content">', '').replace('\n', '').replace('\xa0', '')
         }
         return supply
+
+    def _request(self, method, url, data=None):
+        while True:
+            resp = self.request(method, url, data=data)
+            if '频繁' in resp.text:
+                time.sleep(20)
+            else:
+                break
+        return resp
 
 
 class ZhiPinSpider(BaseSpider):

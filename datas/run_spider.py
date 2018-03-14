@@ -8,14 +8,13 @@ import time
 
 def main():
     queue = Queue()
-    p = {SpiderProcess: SpiderProcess(queue),
-         WriterProcess: WriterProcess(queue)}
-    while True:
-        for i in p.keys():
-            if not p[i].is_alive():
-                p[i] = i(queue)
-                p[i].start()
+    p1 = SpiderProcess(queue)
+    p2 = WriterProcess(queue)
+    p1.start()
+    p2.start()
+    while p2.is_alive():
         time.sleep(1)
+    p1.terminate()
 
 
 if __name__ == '__main__':

@@ -51,15 +51,23 @@ class SpiderProcess(Process):
     def run(self):
         """对每个爬虫类启动单独线程"""
         self.set_logging()
-        spiders = [cls() for cls in SpiderMeta.spiders]
-        spider_count = len(spiders)
-        threads = []
-        for i in range(spider_count):
-            t = Thread(target=self.iter_spider, args=(spiders[i], ))
+        spiders = [cls for cls in SpiderMeta.spiders]
+        threads = {}
+        for i in spiders:
+            i_ins = i()
+            t = Thread(target=self.iter_spider, args=(i_ins, ))
             t.setDaemon(True)
             t.start()
-            threads.append(t)
+            threads[i] = t
+        # 线程中断后生成新线程
         while True:
+            for c, t in threads.items():
+                if not t.is_alive():
+                    ins = c()
+                    new_t = Thread(target=self.iter_spider, args=(ins, ))
+                    new_t.setDaemon(True)
+                    new_t.start()
+                    threads[c] = new_t
             time.sleep(1)
 
 
@@ -77,43 +85,42 @@ class WriterProcess(Process):
         db_session = sessionmaker(bind=engine)
         session = db_session()
         while True:
-            try:
-                result = self.data_queue.get(timeout=90)
-                if result.get('type') == 'company':
-                    d = Company()
-                    d.name = result.get('name')
-                    d.email = fake_en.email()
-                    # d.phone = random.randint(13900000000, 13999999999)
-                    d.password = '123456'
-                    d.logo = result.get('logo')
-                    d.address = result.get('address')
-                    d.field = result.get('field')
-                    d.finance_stage = result.get('finance_stage')
-                    d.description = result.get('description')
-                    d.details = result.get('details')
-                    d.website = result.get('website')
-                    session.add(d)
-                    session.commit()
-                    company_id = session.query(Company).filter(
-                        Company.name == result.get('name')).one().id
+            result = self.data_queue.get(timeout=600)
+            if result.get('type') == 'company':
+                d = Company()
+                d.name = result.get('name')
+                d.email = fake_en.email()
+                # d.phone = random.randint(13900000000, 13999999999)
+                d.password = '123456'
+                d.logo = result.get('logo')
+                d.address = result.get('address')
+                d.field = result.get('field')
+                d.finance_stage = result.get('finance_stage')
+                d.description = result.get('description')
+                d.details = result.get('details')
+                d.website = result.get('website')
+                session.add(d)
+                session.commit()
+                company_id = session.query(Company).filter(
+                    Company.name == result.get('name')).one().id
 
-                elif result.get('type') == 'job':
-                    job = Job()
-                    job.name = result.get('name')
-
+            elif result.get('type') == 'job':
+                job = Job()
+                job.name = result.get('name')
+                try:
                     job.salary_min, job.salary_max = result.get(
                         'salary').replace('k', '').replace('K', '').split('-')
-                    job.company_id = company_id
-                    job.exp = result.get('exp')
-                    job.education = result.get('education')
-                    job.city = result.get('city')
-                    job.description = result.get('description')
-                    job.treatment = result.get('treatment')
-                    job.tags = result.get('tags')
-                    random_time = datetime.now() + timedelta(minutes=random.randint(-30000, 500))
-                    job.updated_at = random_time
-                    job.created_at = random_time
-                    session.add(job)
-                    session.commit()
-            except queue.Empty:
-                print('Done!')
+                except ValueError:
+                    continue
+                job.company_id = company_id
+                job.exp = result.get('exp')
+                job.education = result.get('education')
+                job.city = result.get('city')
+                job.description = result.get('description')
+                job.treatment = result.get('treatment')
+                job.tags = result.get('tags')
+                random_time = datetime.now() + timedelta(minutes=random.randint(-30000, 500))
+                job.updated_at = random_time
+                job.created_at = random_time
+                session.add(job)
+                session.commit()
