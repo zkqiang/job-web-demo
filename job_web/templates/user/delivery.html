@@ -29,9 +29,9 @@
             {% if delivery.status == 1 %}
             <span class="label label-info">未回应</span>
             {% elif delivery.status == 2 %}
-            <span class="label label-success">有意向</span>
-            {% elif delivery.status == 3 %}
             <span class="label label-default">不合适</span>
+            {% elif delivery.status == 3 %}
+            <span class="label label-success">有意向</span>
             {% endif %}
         </td>
       </tr>

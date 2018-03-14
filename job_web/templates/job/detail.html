@@ -20,13 +20,13 @@
     {% if job.is_enable %}
       {% if current_user.role == 10 %}
           {% if current_user.is_authenticated and job.is_applied() %}
-            <a class="btn btn-default btn-lg dilivery-btn disabled navbar-btn" style="margin-top: 32px">已投递</a>
+            <a class="btn btn-success btn-lg dilivery-btn disabled navbar-btn" style="margin-top: 32px">已投递</a>
           {% else %}
             <a href="{{ url_for('job.apply', job_id=job.id) }}" class="btn btn-success btn-lg navbar-btn" style="margin-top: 32px">投递简历</a>
           {% endif %}
       {% endif %}
     {% else %}
-      <a class="btn btn-success btn-lg dilivery-btn disabled navbar-btn" style="margin-top: 32px">职位已下线</a>
+      <a class="btn btn-default btn-lg dilivery-btn disabled navbar-btn" style="margin-top: 32px">职位已下线</a>
     {% endif %}
     </div>
   </div>
@@ -48,7 +48,7 @@
 <div class="col-md-3">
   <div class="thumbnail">
     <a href="{{ url_for('company.detail', company_id=job.company.id) }}">
-      <img src="{{ job.company.logo }}" class="big-logo-img" >
+      <img src="{{ job.company.logo }}" class="img-rounded big-logo-img" >
     </a>
   </div>
 

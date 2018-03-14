@@ -44,7 +44,6 @@ def apply(job_id):
     elif job_obj.is_applied():
         flash('已经投递过该职位', 'warning')
         return redirect(url_for('job.detail', job_id=job_id))
-    print(current_user.resume)
     delivery = Delivery(
         job_id=job_id,
         user_id=current_user.id,

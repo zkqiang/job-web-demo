@@ -76,7 +76,7 @@
       <a href="{{ url_for('company.detail', company_id=company.id) }}">
           <img class="img-rounded logo-img" src="{{ company.logo }}" alt="{{ company.name }}">
       </a>
-      <h4><a href="{{ url_for('company.detail', company_id=company.id) }}">{{ company.name  | truncate(8, True)}}</a></h4>
+      <h4><a href="{{ url_for('company.detail', company_id=company.id) }}">{{ company.name  | truncate(6, True)}}</a></h4>
       <p>{{ company.field }} / {{ company.finance_stage }}</p>
   <hr>
   <a href="{{ url_for('company.detail', company_id=company.id, job='job') }}">
@@ -96,7 +96,7 @@
         <a href="{{ url_for('job.detail', job_id=job.id) }}">
         <b>{{ job.name | truncate(10, True)}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </a><br/>
-        <span style="">{{ job.city }} / {{ job.exp }}经验 / {{ job.education }}</span>
+        <span style="font-size: 13px">{{ job.city }} / {{ job.exp }}经验 / {{ job.education }}</span>
           <span class="salary" style="font-size: 16px; float: right; margin-right: 12px">{{ job.salary_min }}k-{{ job.salary_max }}k</span><br/>
           {% if job.tag_list %}
             {% for tag in job.tag_list[:2] %}
@@ -109,12 +109,12 @@
       <div class="media">
         <div class="media-left">
           <a href="{{ url_for('company.detail', company_id=job.company.id) }}">
-            <img class="media-object" src="{{ job.company.logo }}" width="60" height="60" alt="job.company.name">
+            <img class="img-rounded media-object" src="{{ job.company.logo }}" width="60" height="60" alt="job.company.name">
           </a>
         </div>
         <div class="media-body">
           <a href="{{ url_for('company.detail', company_id=job.company.id) }}">
-          <h4 class="media-heading">{{ job.company.name  | truncate(16, True) }}</h4>
+          <h4 class="media-heading">{{ job.company.name  | truncate(6, True) }}</h4>
           </a>
           <span class="company-meta">{{ job.company.field }} / {{ job.company.finance_stage }}</span>
           </div>

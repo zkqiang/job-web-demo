@@ -3,16 +3,18 @@
 
 from threading import Thread
 from multiprocessing import Process
-from datas.job_spider.spider import SpiderMeta
+from job_spider.spider import SpiderMeta
 import queue
 import logging
 import time
-from job_web.models import Company, Job
 from faker import Faker
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime, timedelta
 import random
+import sys
+sys.path.append('..')
+from job_web.models import Company, Job
 
 
 class SpiderProcess(Process):
@@ -69,7 +71,6 @@ class WriterProcess(Process):
         self.data_queue = data_queue
 
     def run(self):
-        """以当前时间创建 csv 文件，并从队列中获取数据写入"""
         fake_en = Faker()
         company_id = ''
         engine = create_engine('mysql+mysqldb://root@localhost:3306/job_web?charset=utf8')
@@ -79,7 +80,6 @@ class WriterProcess(Process):
             try:
                 result = self.data_queue.get(timeout=90)
                 if result.get('type') == 'company':
-                    print(result)
                     d = Company()
                     d.name = result.get('name')
                     d.email = fake_en.email()
@@ -98,9 +98,9 @@ class WriterProcess(Process):
                         Company.name == result.get('name')).one().id
 
                 elif result.get('type') == 'job':
-                    print(result)
                     job = Job()
                     job.name = result.get('name')
+
                     job.salary_min, job.salary_max = result.get(
                         'salary').replace('k', '').replace('K', '').split('-')
                     job.company_id = company_id

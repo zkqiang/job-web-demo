@@ -9,7 +9,7 @@ import random
 import logging
 from lxml import etree
 from html import unescape
-from datas.job_spider.dupefilter import RedisOperator
+from .dupefilter import RedisOperator
 
 
 class SpiderMeta(type):
@@ -134,7 +134,9 @@ class LaGouSpider(BaseSpider, metaclass=SpiderMeta):
                 result.update(self._parse_company_detail(detail_url))
                 yield result
                 job_page = 1
-                while True:
+                counter = 0
+                total = random.randint(5, 30)
+                while counter < total:
                     job_url = 'https://www.lagou.com/gongsi/searchPosition.json'
                     job_params = {'companyId': c['companyId'], 'pageNo': job_page,
                                   'positionFirstType': '全部', 'pageSize': 10, 'schoolJob': 'false'}
@@ -155,10 +157,13 @@ class LaGouSpider(BaseSpider, metaclass=SpiderMeta):
                             'exp': j['workYear'],
                             'education': j['education'],
                             'treatment': '，'.join(j['companyLabelList']),
-                            'tags': re.sub(r'[\s、]', ',', j['positionAdvantage']),
+                            'tags': re.sub(r'[\s、;]', ',', j['positionAdvantage']),
                         }
                         job_result.update(self._parse_job_detail(detail_url))
                         yield job_result
+                        counter += 1
+                        if counter >= total:
+                            break
                     job_page += 1
             page += 1
 

@@ -18,7 +18,6 @@ def index():
             companies.append(c)
             if len(companies) == 8:
                 break
-
     jobs = Job.query.group_by(Job.company_id).order_by(Job.updated_at.desc()).limit(12)
     return render_template('index.html', active='index', jobs=jobs, companies=companies)
 
@@ -41,7 +40,7 @@ def login():
         if not user_data.is_enable:
             flash('该用户不可用，请联系网站管理员', 'danger')
             return redirect(url_for('front.login'))
-        login_user(user_data)
+        login_user(user_data, form.remember_me.data)
         flash('登录成功', 'success')
         next_page = request.args.get('next')
         return redirect(next_page or url_for('front.index'))

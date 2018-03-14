@@ -77,9 +77,9 @@ class Company(UserBase):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), unique=True, nullable=False)
-    website = db.Column(db.String(64))
-    address = db.Column(db.String(128))
-    logo = db.Column(db.String(256), default=DEFAULT_LOGO)
+    website = db.Column(db.String(128))
+    address = db.Column(db.String(64))
+    logo = db.Column(db.String(128), default=DEFAULT_LOGO)
     role = db.Column(db.SmallInteger, default=UserBase.ROLE_COMPANY)
     # 融资进度
     finance_stage = db.Column(db.String(16))
