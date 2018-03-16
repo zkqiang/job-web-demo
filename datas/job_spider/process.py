@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from threading import Thread
 from multiprocessing import Process
-from job_spider.spider import SpiderMeta
-import queue
+from .spider import LaGouSpider
+from .config import LOGGING_CONF
+from .dbop import SqlOperator
 import logging
-import time
+from logging.config import dictConfig
 from faker import Faker
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 from datetime import datetime, timedelta
+import queue
 import random
 import sys
 sys.path.append('..')
@@ -23,17 +22,7 @@ class SpiderProcess(Process):
     def __init__(self, data_queue):
         Process.__init__(self)
         self.data_queue = data_queue
-        self.logger = logging.getLogger('root')
-
-    def set_logging(self):
-        """设置日志格式"""
-        self.logger = logger = logging.getLogger('root')
-        handler = logging.StreamHandler()
-        formatter = logging.Formatter(
-            '%(asctime)s [%(levelname)s] %(message)s', datefmt='%H:%M:%S')
-        handler.setFormatter(formatter)
-        logger.addHandler(handler)
-        logger.setLevel(logging.DEBUG)
+        self.logger = logging.getLogger()
 
     def iter_spider(self, spider):
         """对爬虫类的`crawl`方法进行迭代，数据送入队列传给另一进程"""
@@ -42,33 +31,15 @@ class SpiderProcess(Process):
             for result in spider.crawl():
                 if not result:
                     continue
-                # 去除内容里的空格换行
-                # for key in result.keys():
-                #     result[key] = re.sub(r'\s+', '', result[key])
                 self.data_queue.put(result)
+        self.data_queue.put('end')
         self.logger.info('%s 爬虫已结束' % spider.__class__.__name__)
 
     def run(self):
-        """对每个爬虫类启动单独线程"""
-        self.set_logging()
-        spiders = [cls for cls in SpiderMeta.spiders]
-        threads = {}
-        for i in spiders:
-            i_ins = i()
-            t = Thread(target=self.iter_spider, args=(i_ins, ))
-            t.setDaemon(True)
-            t.start()
-            threads[i] = t
-        # 线程中断后生成新线程
-        while True:
-            for c, t in threads.items():
-                if not t.is_alive():
-                    ins = c()
-                    new_t = Thread(target=self.iter_spider, args=(ins, ))
-                    new_t.setDaemon(True)
-                    new_t.start()
-                    threads[c] = new_t
-            time.sleep(1)
+        dictConfig(LOGGING_CONF)
+        self.logger.info('进程-I 已启动')
+        spider = LaGouSpider()
+        self.iter_spider(spider)
 
 
 class WriterProcess(Process):
@@ -77,50 +48,44 @@ class WriterProcess(Process):
     def __init__(self, data_queue):
         Process.__init__(self)
         self.data_queue = data_queue
+        self.logger = logging.getLogger()
 
     def run(self):
+        dictConfig(LOGGING_CONF)
+        self.logger.info('进程-II 已启动')
         fake_en = Faker()
-        company_id = ''
-        engine = create_engine('mysql+mysqldb://root@localhost:3306/job_web?charset=utf8')
-        db_session = sessionmaker(bind=engine)
-        session = db_session()
+        company_id = 1
+        sql = SqlOperator()
         while True:
-            result = self.data_queue.get(timeout=600)
+            try:
+                result = self.data_queue.get(timeout=600)
+            except queue.Empty:
+                self.logger.info('Done!')
+                return 
             if result.get('type') == 'company':
-                d = Company()
-                d.name = result.get('name')
-                d.email = fake_en.email()
-                # d.phone = random.randint(13900000000, 13999999999)
-                d.password = '123456'
-                d.logo = result.get('logo')
-                d.address = result.get('address')
-                d.field = result.get('field')
-                d.finance_stage = result.get('finance_stage')
-                d.description = result.get('description')
-                d.details = result.get('details')
-                d.website = result.get('website')
-                session.add(d)
-                session.commit()
-                company_id = session.query(Company).filter(
-                    Company.name == result.get('name')).one().id
+                company = Company()
+                attrs = ['name', 'logo', 'address', 'field', 'finance_stage',
+                         'description', 'details', 'website']
+                list(map(lambda k: setattr(company, k, result.get(k)), attrs))
+                company.email = fake_en.email()
+                # company.phone = random.randint(13900000000, 13999999999)
+                company.password = '123456'
+                sql.add_commit(company)
 
             elif result.get('type') == 'job':
                 job = Job()
-                job.name = result.get('name')
                 try:
                     job.salary_min, job.salary_max = result.get(
                         'salary').replace('k', '').replace('K', '').split('-')
                 except ValueError:
                     continue
+                if result.get('company_id'):
+                    company_id = result.get('company_id')
                 job.company_id = company_id
-                job.exp = result.get('exp')
-                job.education = result.get('education')
-                job.city = result.get('city')
-                job.description = result.get('description')
-                job.treatment = result.get('treatment')
-                job.tags = result.get('tags')
+                attrs = ['name', 'exp', 'education', 'city', 'description',
+                         'treatment', 'tags']
+                list(map(lambda k: setattr(job, k, result.get(k)), attrs))
                 random_time = datetime.now() + timedelta(minutes=random.randint(-30000, 500))
                 job.updated_at = random_time
                 job.created_at = random_time
-                session.add(job)
-                session.commit()
+                sql.add_commit(job)

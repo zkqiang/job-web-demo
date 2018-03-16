@@ -13,8 +13,11 @@ def main():
     p1.start()
     p2.start()
     while p2.is_alive():
+        if not p1.is_alive():
+            p1 = SpiderProcess(queue)
+            p1.start()
         time.sleep(1)
-    p1.terminate()
+    p2.terminate()
 
 
 if __name__ == '__main__':
