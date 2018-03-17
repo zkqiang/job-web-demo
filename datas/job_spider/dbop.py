@@ -17,7 +17,7 @@ class SqlOperator(object):
         engine = create_engine(MYSQL_URL)
         db_session = sessionmaker(bind=engine)
         self.session = db_session()
-        self.logger = logging.getLogger()
+        self.logger = logging.getLogger('root')
 
     def add_commit(self, data):
         self.session.add(data)

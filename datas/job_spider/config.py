@@ -21,16 +21,25 @@ UA = {
 }
 
 LOGGING_CONF = {'version': 1,
-                'formatters': {'f': {'format': '%(asctime)s [%(levelname)s] %(message)s',
-                                     'datefmt': '%H:%M:%S'}
+                'disable_existing_loggers': False,
+                'formatters': {'fh_format': {'format': '%(asctime)s [%(levelname)s] %(message)s'},
+                               'sh_format': {'format': '%(asctime)s [%(levelname)s] %(message)s',
+                                             'datefmt': '%H:%M:%S'
+                                             }
                                },
-                'handlers': {'h': {'level': 'INFO',
-                                   'formatter': 'f',
-                                   'class': 'logging.StreamHandler'}
+                'handlers': {'fh': {'level': 'DEBUG',
+                                    'formatter': 'fh_format',
+                                    'class': 'logging.FileHandler',
+                                    'filename': './log.txt'
+                                    },
+                             'sh': {'level': 'INFO',
+                                    'formatter': 'sh_format',
+                                    'class': 'logging.StreamHandler'
+                                    }
                              },
-                'loggers': {'root': {'handlers': ['h'],
-                                     'level': 'INFO',
+                'loggers': {'root': {'handlers': ['fh', 'sh'],
+                                     'level': 'DEBUG',
                                      'encoding': 'utf8'
-                                     },
+                                     }
                             }
                 }

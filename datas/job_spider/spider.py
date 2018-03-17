@@ -31,9 +31,9 @@ class LaGouSpider(object):
                       'JSESSIONID=ABAAABAAAIAACBIF3290756E031DCE7CCEA3986CB372F49; '
                       'SEARCH_ID=d30eb13562344eb9b5f6b8f05eb2cefc'
         })
-        self.logger = logging.getLogger()
+        self.logger = logging.getLogger('root')
         # 同一爬虫连续请求的最短间隔
-        self.request_sleep = 5
+        self.request_sleep = 7
         # 用于记录最近一次请求的时间戳
         self._time_recode = 0
         self._redis = Dupefilter()
@@ -47,23 +47,22 @@ class LaGouSpider(object):
                 return True
             for c in companies:
                 result, company_id = self._parse_company_data(c)
-                if result:
-                    yield result
-
+                yield result if result else {'type': 'company', 'company_id': company_id}
                 job_page = 1
                 counter = 0
                 # 每个公司的职位只随机爬前N个
                 total = random.randint(5, 30)
                 while counter < total:
-                    jobs = self._get_job_data(company_id, job_page)
+                    jobs = self._get_job_data(c['companyId'], job_page)
                     if not jobs:
                         break
                     for j in jobs:
-                        job_result = self._parse_job_data(j, company_id)
+                        job_result = self._parse_job_data(j)
+                        counter += 1
                         if not job_result:
+                            counter = total
                             break
                         yield job_result
-                        counter += 1
                     job_page += 1
             page += 1
 
@@ -98,16 +97,14 @@ class LaGouSpider(object):
                 'logo': 'https://www.lgstatic.com/thumbnail_300x300/' + data['companyLogo']
             }
             result.update(self._parse_company_detail(detail_url))
-            company_id = data['companyId']
         return result, company_id
 
-    def _parse_job_data(self, data, company_id):
+    def _parse_job_data(self, data):
         detail_url = 'https://www.lagou.com/jobs/%s.html' % data['positionId']
         if not self._redis.add(detail_url):
             return None
         job_result = {
             'type': 'job',
-            'company_id': company_id,
             'name': data['positionName'],
             'salary': data['salary'],
             'city': data['city'],
@@ -125,14 +122,15 @@ class LaGouSpider(object):
         name = html.xpath('//div[@class="company_main"]/h1/a/text()')
         # 这里最好先判断一下，以免没提取到出现异常
         if not name:
-            self.logger.warning('%s 解析出错' % detail_url)
+            self.logger.debug('请求到错误页面')
+            time.sleep(30)
             return self._parse_company_detail(detail_url)
         # 返回的键必须包含这些，否则写入会报错
         supply = {
             'details': unescape(str(etree.tostring(html.xpath(
                 '//span[@class="company_content"]')[0]), encoding='utf8')).replace(
                 '<span class="company_content">', '').replace('\n', '').replace('\xa0', ''),
-            'website': html.xpath('//div[@class="company_main"]/a[1]/@href')[0],
+            'website': html.xpath('//div[@class="company_main"]/a[1]/@href')[0].split('?')[0],
         }
         return supply
 
@@ -141,7 +139,8 @@ class LaGouSpider(object):
         html = etree.HTML(resp.text.replace('\u2028', '').encode('utf-8'))
         title = html.xpath('//span[@class="name"]/text()')
         if not title:
-            self.logger.warning('%s 解析出错' % url)
+            self.logger.debug('请求到错误页面')
+            time.sleep(30)
             return self._parse_job_detail(url)
         supply = {
             'description': unescape(str(etree.tostring(
@@ -168,6 +167,7 @@ class LaGouSpider(object):
             if encoding:
                 resp.encoding = encoding
             if '频繁' in resp.text:
+                self.logger.debug('请求频繁重试')
                 time.sleep(20)
             else:
                 break

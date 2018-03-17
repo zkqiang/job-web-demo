@@ -98,7 +98,7 @@ class Job(Base):
     __tablename__ = 'job'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(32), nullable=False)
+    name = db.Column(db.String(64), nullable=False)
     salary_min = db.Column(db.SmallInteger, nullable=False, index=True)
     salary_max = db.Column(db.SmallInteger, nullable=False, index=True)
     company_id = db.Column(db.Integer, db.ForeignKey('company.id', ondelete='CASCADE'))
