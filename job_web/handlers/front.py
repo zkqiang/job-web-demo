@@ -53,3 +53,15 @@ def logout():
     logout_user()
     flash('您已经退出登录', 'success')
     return redirect(url_for('front.index'))
+
+
+@front.route('/search')
+def search():
+    search_type = request.args.get('type')
+    kw = request.args.get('kw')
+    if search_type == 'job':
+        return redirect(url_for('job.index', kw=kw))
+    elif search_type == 'company':
+        return redirect(url_for('company.index', kw=kw))
+    else:
+        return redirect(url_for('front.index'))

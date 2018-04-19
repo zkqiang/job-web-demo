@@ -118,7 +118,8 @@ class LaGouSpider(object):
 
     def _parse_company_detail(self, detail_url):
         resp = self._request('get', detail_url)
-        html = etree.HTML(resp.text.replace('\u2028', '').encode('utf-8'))
+        resp.encoding = resp.apparent_encoding
+        html = etree.HTML(resp.text)
         name = html.xpath('//div[@class="company_main"]/h1/a/text()')
         # 这里最好先判断一下，以免没提取到出现异常
         if not name:
@@ -136,7 +137,8 @@ class LaGouSpider(object):
 
     def _parse_job_detail(self, url):
         resp = self._request('get', url)
-        html = etree.HTML(resp.text.replace('\u2028', '').encode('utf-8'))
+        resp.encoding = resp.apparent_encoding
+        html = etree.HTML(resp.text)
         title = html.xpath('//span[@class="name"]/text()')
         if not title:
             self.logger.debug('请求到错误页面')

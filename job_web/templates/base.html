@@ -37,9 +37,33 @@
                             <a href="{{ url_for('job.index') }}">职位</a>
                         </li>
                         <li class="{% if active == 'company' %}active{% endif %}">
-                            <a href="{{ url_for('company.index') }}">公司</a>
+                            <a href="{{ url_for('company.index') }}">企业</a>
                         </li>
                     </ul>
+                    <form class="navbar-form navbar-left" action="{{ url_for('front.search') }}">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <select class="btn btn-default form-control" name="type" id="type">
+                                    <option value='job'>职位</option>
+                                    <option value='company'>企业</option>
+                                </select>
+                                <script>
+                                {% if 'company' in request.url %}
+                                    $("#type").val('company');
+                                {% else %}
+                                    $("#type").val('job');
+                                {% endif %}
+                                </script>
+                            </div>
+                            <input type="text" class="form-control" name="kw" id="kw"
+                                   value="{{ request.args.get('kw', '') }}" placeholder="搜索">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+                            </span>
+                          </div>
+                    </form>
                     <ul class="nav navbar-nav navbar-right">
                         {% if not current_user.is_authenticated %}
                             <li class="{% if active == 'company_register' %}active{% endif %}">

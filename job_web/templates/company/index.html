@@ -9,6 +9,12 @@
   <h4>Todo: 条件筛选</h4>
 </div>
 
+{% if pagination.total == 0 %}
+    <div align="center" >
+      <img src="{{ url_for('static', filename='images/no_company.png') }}" width="200">
+      <h3>查无企业</h3>
+    </div>
+{% endif %}
 
 <div class="company-list">
 {% for company in pagination.items %}
@@ -16,5 +22,5 @@
 {% endfor %}
 </div>
 
-{{ render_pagination(pagination, 'company.index') }}
+{{ render_pagination(pagination, 'company.index', kw=kw) }}
 {% endblock %}

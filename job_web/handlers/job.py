@@ -14,14 +14,18 @@ job = Blueprint('job', __name__, url_prefix='/job')
 @job.route('/')
 def index():
     page = request.args.get('page', default=1, type=int)
-    # fil = request.args.get('filter', default=None, type=str)
-    pagination = Job.query.filter(Job.is_enable.is_(True)).order_by(
+    kw = request.args.get('kw')
+    flt = {Job.is_enable == True}
+    if kw is not None and kw != '':
+        flt.update({Job.name.like('%{}%'.format(kw))})
+    pagination = Job.query.filter(*flt).order_by(
             Job.created_at.desc()).paginate(
                 page=page,
                 per_page=current_app.config['JOB_INDEX_PER_PAGE'],
                 error_out=False
             )
-    return render_template('job/index.html', pagination=pagination, filter=EXP, active='job')
+    return render_template('job/index.html', pagination=pagination,
+                           kw=kw, filter=EXP, active='job')
 
 
 @job.route('/<int:job_id>')

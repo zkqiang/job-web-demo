@@ -26,9 +26,13 @@ def register():
 @company.route('/')
 def index():
     page = request.args.get('page', default=1, type=int)
-    pagination = Company.query.filter(Company.is_enable.is_(True)).order_by(Company.updated_at.desc()).paginate(
+    kw = request.args.get('kw')
+    flt = {Company.is_enable == True}
+    if kw is not None and kw != '':
+        flt.update({Company.name.ilike('%{}%'.format(kw))})
+    pagination = Company.query.filter(*flt).order_by(Company.updated_at.desc()).paginate(
         page=page, per_page=current_app.config['COMPANY_INDEX_PER_PAGE'], error_out=False)
-    return render_template('company/index.html', pagination=pagination, active='company')
+    return render_template('company/index.html', pagination=pagination, kw=kw, active='company')
 
 
 @company.route('/<int:company_id>')

@@ -17,6 +17,7 @@ def main():
             p1 = SpiderProcess(queue)
             p1.start()
         time.sleep(1)
+    p1.terminate()
     p2.terminate()
 
 

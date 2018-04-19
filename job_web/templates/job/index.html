@@ -7,11 +7,16 @@
 <div class="jumbotron">
   <h4>Todo: 条件筛选</h4>
 </div>
-
+{% if pagination.total == 0 %}
+    <div align="center" >
+      <img src="{{ url_for('static', filename='images/no_job.png') }}" width="200">
+      <h3>查无职位</h3>
+    </div>
+{% endif %}
 <div class="job_list">
     {% for job in pagination.items %}
         {{ render_job(job) }}
     {% endfor %}
 </div>
-{{ render_pagination(pagination, 'job.index') }}
+{{ render_pagination(pagination, 'job.index', kw=kw) }}
 {% endblock %}
