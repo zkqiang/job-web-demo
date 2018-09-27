@@ -3,7 +3,7 @@
 
 # datas\job_spider\process.py: 10
 # datas\test_data.py: 4
-Faker == 0.8.12
+Faker >= 0.8.12
 
 # job_web\app.py: 1
 # job_web\decorators.py: 5
@@ -13,11 +13,11 @@ Faker == 0.8.12
 # job_web\handlers\job.py: 4
 # job_web\handlers\user.py: 4
 # job_web\models.py: 2
-Flask == 0.12.2
+Flask >= 0.12.3
 
 # job_web\app.py: 4
 # job_web\forms.py: 1
-Flask_CKEditor == 0.3.3
+Flask_CKEditor >= 0.3.3
 
 # job_web\app.py: 7
 # job_web\decorators.py: 6
@@ -28,42 +28,42 @@ Flask_CKEditor == 0.3.3
 # job_web\handlers\job.py: 6
 # job_web\handlers\user.py: 5
 # job_web\models.py: 5
-Flask_Login == 0.4.1
+Flask_Login >= 0.4.1
 
 # job_web\app.py: 5
-Flask_Migrate == 2.1.1
+Flask_Migrate >= 2.1.1
 
 # job_web\app.py: 6
-Flask_Moment == 0.6.0
+Flask_Moment >= 0.6.0
 
 # job_web\models.py: 3
-Flask_SQLAlchemy == 2.3.2
+Flask_SQLAlchemy >= 2.3.2
 
 # job_web\app.py: 8
-Flask_Share == 0.1.0
+Flask_Share >= 0.1.0
 
 # job_web\app.py: 9
 # job_web\config.py: 2
-Flask_Uploads == 0.2.1
+Flask_Uploads >= 0.2.1
 
 # job_web\forms.py: 4
-Flask_WTF == 0.14.2
+Flask_WTF >= 0.14.2
 
 # datas\job_spider\process.py: 11,12
 # job_web\models.py: 6
-SQLAlchemy == 1.2.5
+SQLAlchemy >= 1.2.5
 
 # job_web\forms.py: 7
-WTForms == 2.1
+WTForms >= 2.1
 
 # job_web\models.py: 4
-Werkzeug == 0.14.1
+Werkzeug >= 0.14.1
 
 # datas\job_spider\spider.py: 10
-lxml == 4.2.0
+lxml >= 4.2.0
 
 # datas\job_spider\dupefilter.py: 3
-redis == 2.10.6
+redis >= 2.10.6
 
 # datas\job_spider\spider.py: 4
-requests == 2.18.4
+requests >= 2.18.4
