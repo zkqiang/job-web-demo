@@ -17,7 +17,7 @@ def register_extensions(app):
     Migrate(app, db)
     CKEditor(app)
     Moment(app)
-    share = Share(app)
+    share = Share()
     share.init_app(app)
     login_manager = LoginManager()
     login_manager.init_app(app)
