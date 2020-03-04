@@ -1,12 +1,28 @@
-# 招聘网站 DEMO 项目
-基于 Flask / Jinja2 / Bootstrap / MySQL 开发，仿照拉勾网的风格，实现了招聘网站的必须功能
+# 简单的招聘网站示例
+基于 Flask / Jinja2 / Bootstrap / MySQL 开发，仿照拉勾网的风格，实现了招聘网站的必需功能
+
+## 环境
+* Python 3
+
+## 安装
+1. 安装 Python 依赖：
+```sh
+pip3 install -r requirements.txt
+```
+
+2. 利用 flask-migrate 建表：
+```sh
+flask db init
+flask db migrate
+flask db upgrade
+```
 
 ## 实现功能
 * 个人和企业两种角色的注册登录编辑
 * 职位和企业的索引页、详情页及搜索功能
 * 个人简历上传和投递操作
 * 企业对职位的增删改查上下线，及对简历的反馈处理
-* 低频持续爬取真实数据入库展示
+* 低频持续爬取真实数据入库展示（现已失效）
 
 ## TODO
 - [ ] 职位和企业的条件筛选
