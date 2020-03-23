@@ -12,7 +12,7 @@ class BaseConfig(object):
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqldb://root@localhost:3306/job_web?charset=utf8'
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqldb://root:123456@localhost:3306/job_web?charset=utf8'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     UPLOADED_SIZE = 300 * 1024
