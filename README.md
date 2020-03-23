@@ -3,15 +3,29 @@
 
 ## 环境
 * Python 3
+* MySQL
 
 ## 安装
-1. 安装 Python 依赖：
+
+#### 1. 安装 Python 依赖
 ```sh
 pip3 install -r requirements.txt
 ```
 
-2. 利用 flask-migrate 建表：
+#### 2. 修改配置文件
+
+根据自己情况，修改 `job_web/config.py`
+
+主要是 `SQLALCHEMY_DATABASE_URI` 数据库的链接
+
+#### 3. 利用 flask-migrate 建表
+
+先创建 `job_web` 数据库，然后依次执行下列命令：
+
 ```sh
+export FLASK_APP=manage.py
+# windows 系统：set FLASK_APP=manage.py
+
 flask db init
 flask db migrate
 flask db upgrade
