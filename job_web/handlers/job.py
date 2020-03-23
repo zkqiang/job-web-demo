@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint, render_template, abort,\
@@ -15,7 +14,7 @@ job = Blueprint('job', __name__, url_prefix='/job')
 def index():
     page = request.args.get('page', default=1, type=int)
     kw = request.args.get('kw')
-    flt = {Job.is_enable == True}
+    flt = {Job.is_enable is True}
     if kw is not None and kw != '':
         flt.update({Job.name.like('%{}%'.format(kw))})
     pagination = Job.query.filter(*flt).order_by(

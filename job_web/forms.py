@@ -138,17 +138,17 @@ class CompanyDetailForm(FlaskForm):
 
 class JobForm(FlaskForm):
 
-    name = StringField('职位名称', validators=[DataRequired(message='请填写内容'), Length(4, 32)])
+    name = StringField('职位名称', validators=[DataRequired(message='请填写内容'), Length(4, 64)])
     salary_min = IntegerField('最低薪水（单位：千元）', validators=[DataRequired(message='请填写整数')])
     salary_max = IntegerField('最高薪水（单位：千元）', validators=[DataRequired(message='请填写整数')])
     city = StringField('工作城市', validators=[DataRequired(message='请填写内容'),
-                                           Length(0, 4, message='最多4个字符')])
+                                           Length(0, 16, message='最多16个字符')])
     tags = StringField('职位标签(用逗号区隔)', validators=[Length(0, 64)])
     exp = SelectField('工作年限', choices=[(i, i) for i in EXP])
     education = SelectField('学历要求', choices=[(i, i) for i in EDUCATION])
     treatment = CKEditorField('职位待遇', validators=[Length(0, 256, message='最多256个字符')])
     description = CKEditorField('职位描述', validators=[DataRequired(message='请填写内容')])
-    is_enable = SelectField('发布', choices=[('True', '立即发布'), ('False', '暂不发布')])
+    is_enable = SelectField('发布', choices=[(True, '立即发布'), (False, '暂不发布')], coerce=bool)
     submit = SubmitField('提交')
 
     def validate_salary_min(self, field):

@@ -27,7 +27,7 @@ def register():
 def index():
     page = request.args.get('page', default=1, type=int)
     kw = request.args.get('kw')
-    flt = {Company.is_enable == True}
+    flt = {Company.is_enable is True}
     if kw is not None and kw != '':
         flt.update({Company.name.ilike('%{}%'.format(kw))})
     pagination = Company.query.filter(*flt).order_by(Company.updated_at.desc()).paginate(
