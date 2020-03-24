@@ -5,11 +5,11 @@
 * Python 3
 * MySQL
 
-## 安装
+## 快速开始
 
 #### 1. 安装 Python 依赖
 ```sh
-pip3 install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 #### 2. 修改配置文件
@@ -18,25 +18,32 @@ pip3 install -r requirements.txt
 
 主要是 `SQLALCHEMY_DATABASE_URI` 数据库的链接
 
-#### 3. 利用 flask-migrate 建表
+#### 3. 创建数据库
 
-先创建 `job_web` 数据库，然后依次执行下列命令：
+根据上面配置中的库名，创建数据库
+
+#### 4. 利用 flask-migrate 建表
+
+命令行终端，先进入项目目录，然后依次执行下列命令：
 
 ```sh
-export FLASK_APP=manage.py
+$ export FLASK_APP=manage.py
 # windows 系统：set FLASK_APP=manage.py
 
-flask db init
-flask db migrate
-flask db upgrade
+$ flask db init
+$ flask db migrate
+$ flask db upgrade
 ```
+
+#### 5. 生成测试数据（可选）
+
+可执行 [test_data.py](https://github.com/zkqiang/job-web-demo/blob/master/data/test_data.py) 生成一些随机数据
 
 ## 实现功能
 * 个人和企业两种角色的注册登录编辑
 * 职位和企业的索引页、详情页及搜索功能
 * 个人简历上传和投递操作
 * 企业对职位的增删改查上下线，及对简历的反馈处理
-* 低频持续爬取真实数据入库展示（现已失效）
 
 ## TODO
 - [ ] 职位和企业的条件筛选
